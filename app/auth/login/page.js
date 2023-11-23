@@ -2,10 +2,10 @@
 import Navbar from "../../components/ui/Navbar";
 const page = () => {
   return (
-    <div className="bg-[#ffd372] h-[100dvh]" >
+    <div className="bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 h-[100dvh]">
       <Navbar />
 
-      <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md mt-24 ">
+      <div className="w-full max-w-sm mx-auto overflow-hidden rounded-lg mt-24 ">
         <div className="px-6 py-4">
           <h3 className="mt-3 text-xl font-medium text-center text-gray-600 ">
             Welcome Back
@@ -51,9 +51,9 @@ const page = () => {
           </form>
         </div>
 
-        <div className="flex items-center justify-center py-4 text-center bg-gray-50">
-          <span className="text-sm text-gray-600 dark:text-gray-200">
-            Don't have an account?{" "}
+        <div className="flex items-center justify-center py-4 text-center">
+          <span className="text-sm text-gray-600 dark:text-gray-900">
+            Do not have an account?{" "}
           </span>
 
           <a

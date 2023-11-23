@@ -1,56 +1,74 @@
 "use client";
 
-import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../../components/store/uislice";
 
 import Navbar from "../../components/ui/Navbar";
 import RedCancel from "../../../public/red-cancel.svg";
-import Image from "next/image";
+import Modal from "../../components/ui/Modal";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [isEmailError, setIsEmailError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
+  const isLoading = useSelector((state) => state.ui.isLoading);
+  const isOpen = useSelector((state) => state.ui.isOpen);
+  const isModalOpen = useSelector((state) => state.ui.isModalOpen);
+
   async function loginHandler(e) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      dispatch(uiActions.setIsLoading(true));
 
-    const enteredData = {
-      email: emailInputRef.current.value,
-      password: passwordInputRef.current.value,
-    };
+      const enteredData = {
+        email: emailInputRef.current.value,
+        password: passwordInputRef.current.value,
+      };
 
-    const emailIsValid =
-      enteredData.email.includes("@") && enteredData.email.trim().length > 0;
-    const passwordIsValid = enteredData.password.trim().length > 6;
+      const emailIsValid =
+        enteredData.email.includes("@") && enteredData.email.trim().length > 0;
+      const passwordIsValid = enteredData.password.trim().length > 6;
 
-    if (!emailIsValid) {
-      setIsEmailError(true);
-      return;
+      if (!emailIsValid) {
+        setIsEmailError(true);
+        dispatch(uiActions.setIsLoading(false));
+      } else {
+        setIsEmailError(false);
+      }
+
+      if (!passwordIsValid) {
+        setIsPasswordError(true);
+        dispatch(uiActions.setIsLoading(false));
+      } else {
+        setIsPasswordError(false);
+      }
+
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(enteredData),
+      });
+
+      const data = await res.json();
+      console.log(data);
+      dispatch(uiActions.setIsLoading(false));
+    } catch (error) {
+      dispatch(uiActions.setIsLoading(false));
     }
-
-    if (!passwordIsValid) {
-      setIsPasswordError(true);
-      return;
-    }
-
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(enteredData),
-    });
-
-    const data = await res.json();
-    console.log(data);
   }
 
   return (
     <div className="bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 h-[100dvh]">
+      {isLoading && <Modal />}
       <Navbar />
-
       <div className="w-full max-w-sm mx-auto overflow-hidden rounded-lg mt-24 ">
         <div className="px-6 py-4">
           <h3 className="mt-3 text-xl font-medium text-center text-gray-600 ">

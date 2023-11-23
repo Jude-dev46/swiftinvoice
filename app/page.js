@@ -6,7 +6,6 @@ import Link from "next/link";
 
 import part1 from "../public/Image.png";
 import part2 from "../public/Image2.png";
-import text from "../public/text.png";
 import Logo from "../public/logo-text.svg";
 
 function welcomePage() {

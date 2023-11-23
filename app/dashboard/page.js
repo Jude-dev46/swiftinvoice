@@ -1,7 +1,14 @@
 import React from "react";
+import Sidebar from "../components/dashboardUI/Sidebar";
+import Main from "../components/dashboardUI/Main";
 
 const Dashboard = () => {
-  return <div>Welcome to the dashboard!</div>;
+  return (
+    <div>
+      <Sidebar />
+      <Main />
+    </div>
+  );
 };
 
 export default Dashboard;

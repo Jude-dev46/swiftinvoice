@@ -2,9 +2,21 @@ import { NextResponse } from "next/server";
 
 const Client = require("../models/client");
 const User = require("../models/user");
-const uuid = require("uuid").v4;
+// const uuid = require("uuid").v4;
 
-export async function GET(req) {}
+export async function GET() {
+  try {
+    const foundClients = await Client.find({});
+
+    return NextResponse.json({
+      status: true,
+      message: "Successfully retrieved clients!",
+      data: foundClients,
+    });
+  } catch (error) {
+    return NextResponse.json({ status: false, message: "An error occurred!" });
+  }
+}
 
 export async function POST(req) {
   try {
@@ -44,11 +56,42 @@ export async function POST(req) {
       { status: 201 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ status: false, message: "An error occurred!" });
   }
 }
 
-export async function PATCH(req) {}
+export async function PATCH(req) {
+  try {
+    const body = await req.json();
+    const { email } = body;
 
-export async function DELETE(req) {}
+    await Client.updateOne({ email }, body);
+    return NextResponse.json({
+      status: true,
+      message: "Successfully updated client!",
+    });
+  } catch (error) {
+    return NextResponse.json({ status: false, message: "An error occurred!" });
+  }
+}
+
+export async function DELETE(req) {
+  try {
+    const body = await req.json();
+    const { email } = body;
+
+    await Client.deleteOne({ email });
+    return NextResponse.json(
+      {
+        status: true,
+        message: "Successfully deleted client!",
+      },
+      { status: 410 }
+    );
+  } catch (error) {
+    return NextResponse.json({
+      status: true,
+      message: "An error occurred!",
+    });
+  }
+}

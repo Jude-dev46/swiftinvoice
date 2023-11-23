@@ -7,25 +7,18 @@ import Link from "next/link";
 import part1 from "../public/Image.png";
 import part2 from "../public/Image2.png";
 import text from "../public/text.png";
+import Logo from "../public/logo-text.svg";
 
 function welcomePage() {
   return (
     <div className="">
       <Link href="/">
-        <div className="bg-neutral-100 bg-opacity-50 backdrop-blur-[10px] flex flex-row items-center fixed w-full px-8 py-1 lg:py-2 lg:px-14">
-          <div>
-            <Image src={part1} width={30} height={30} className="" alt="" />
-            <Image
-              src={part2}
-              width={30}
-              height={30}
-              className="-mt-[10px]"
-              alt=""
-            />
-          </div>
-          <div className="pl-2">
-            <Image src={text} width={130} height={70} className="" alt="" />
-          </div>
+        <div className="bg-neutral-100 bg-opacity-50 backdrop-blur-[10px] flex flex-row items-center fixed w-full px-8 py-1 lg:py-4 lg:px-8">
+          <Image
+            src={Logo}
+            alt=""
+            className=" w-[8.5rem] sm:w-auto h-10 sm:h-19"
+          />
         </div>
       </Link>
 

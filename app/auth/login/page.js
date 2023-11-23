@@ -1,6 +1,52 @@
 "use client";
+
+import { useRef, useState } from "react";
+import Link from "next/link";
+
 import Navbar from "../../components/ui/Navbar";
-const page = () => {
+import RedCancel from "../../../public/red-cancel.svg";
+import Image from "next/image";
+
+const Login = () => {
+  const [isEmailError, setIsEmailError] = useState(false);
+  const [isPasswordError, setIsPasswordError] = useState(false);
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+
+  async function loginHandler(e) {
+    e.preventDefault();
+
+    const enteredData = {
+      email: emailInputRef.current.value,
+      password: passwordInputRef.current.value,
+    };
+
+    const emailIsValid =
+      enteredData.email.includes("@") && enteredData.email.trim().length > 0;
+    const passwordIsValid = enteredData.password.trim().length > 6;
+
+    if (!emailIsValid) {
+      setIsEmailError(true);
+      return;
+    }
+
+    if (!passwordIsValid) {
+      setIsPasswordError(true);
+      return;
+    }
+
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(enteredData),
+    });
+
+    const data = await res.json();
+    console.log(data);
+  }
+
   return (
     <div className="bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 h-[100dvh]">
       <Navbar />
@@ -15,7 +61,7 @@ const page = () => {
             Login or create account
           </p>
 
-          <form>
+          <form onSubmit={loginHandler}>
             <div className="w-full mt-4">
               <label htmlFor="email" className="text-black">
                 Email Address
@@ -24,9 +70,18 @@ const page = () => {
                 id="email"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-lg focus:border-[#FFB600] focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-[#ffe08a]"
                 type="email"
+                ref={emailInputRef}
                 placeholder="Email Address"
                 aria-label="Email Address"
               />
+              {isEmailError && (
+                <p className="text-black flex gap-2 items-center mt-2">
+                  <span>
+                    <Image src={RedCancel} width={20} height={20} alt="" />
+                  </span>{" "}
+                  Invalid email
+                </p>
+              )}
             </div>
 
             <div className="w-full mt-4">
@@ -37,9 +92,18 @@ const page = () => {
                 id="password"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-lg focus:border-[#FFB600] focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-[#ffe08a]"
                 type="password"
+                ref={passwordInputRef}
                 placeholder="Password"
                 aria-label="Password"
               />
+              {isPasswordError && (
+                <p className="text-black flex gap-2 items-center mt-2">
+                  <span>
+                    <Image src={RedCancel} width={20} height={20} alt="" />
+                  </span>{" "}
+                  Invalid password input
+                </p>
+              )}
             </div>
 
             <button
@@ -56,16 +120,16 @@ const page = () => {
             Do not have an account?{" "}
           </span>
 
-          <a
-            href="#"
+          <Link
+            href="/auth"
             className="mx-2 text-sm font-bold text-[#3155D3] hover:underline"
           >
             sign up here
-          </a>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default page;
+export default Login;

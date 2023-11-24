@@ -9,7 +9,7 @@ import Home from "../../../public/home.svg";
 import Logo from "../../../public/logo-text.svg";
 import Invoices from "../../../public/invoice.svg";
 import Notifications from "../../../public/notifications.svg";
-import Services from "../../../public/Services.svg";
+import Services from "../../../public/services.svg";
 import Settings from "../../../public/settings.svg";
 
 const Sidebar = () => {

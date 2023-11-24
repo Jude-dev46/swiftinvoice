@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -44,6 +45,12 @@ export async function POST(request) {
     foundUser.refreshToken = refreshToken;
     await foundUser.save();
 
+    cookies().set({
+      name: "jwt",
+      value: token,
+      httpOnly: true,
+      path: "/dashboard",
+    });
     return NextResponse.json({
       status: true,
       message: "Successfully logged in user",

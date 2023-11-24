@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../components/store/uislice";
@@ -12,14 +13,15 @@ import Modal from "../../components/ui/Modal";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [isEmailError, setIsEmailError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
   const isLoading = useSelector((state) => state.ui.isLoading);
-  const isOpen = useSelector((state) => state.ui.isOpen);
-  const isModalOpen = useSelector((state) => state.ui.isModalOpen);
+  // const isOpen = useSelector((state) => state.ui.isOpen);
+  // const isModalOpen = useSelector((state) => state.ui.isModalOpen);
 
   async function loginHandler(e) {
     try {
@@ -33,7 +35,7 @@ const Login = () => {
 
       const emailIsValid =
         enteredData.email.includes("@") && enteredData.email.trim().length > 0;
-      const passwordIsValid = enteredData.password.trim().length > 6;
+      const passwordIsValid = enteredData.password.trim().length >= 6;
 
       if (!emailIsValid) {
         setIsEmailError(true);
@@ -59,7 +61,9 @@ const Login = () => {
 
       const data = await res.json();
       console.log(data);
+
       dispatch(uiActions.setIsLoading(false));
+      router.push("/dashboard");
     } catch (error) {
       dispatch(uiActions.setIsLoading(false));
     }

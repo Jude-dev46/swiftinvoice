@@ -4,7 +4,7 @@ import Main from "../components/dashboardUI/Main";
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className="h-[100svh] flex w-full">
       <Sidebar />
       <Main />
     </div>

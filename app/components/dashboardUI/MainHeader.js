@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import Add from "../../../public/add.svg";
 import Notifications from "../../../public/notifications.svg";
@@ -13,9 +14,11 @@ const MainHeader = () => {
             John James<span className="">Admin</span>
           </p>
         </div>
-        <p className="bg-blue-900 rounded-full px-4 py-2">J</p>
-        <Image src={Notifications} width={32} height={32} alt="" />
-        <Image src={Add} width={32} height={32} alt="" />
+        <Link href="/account">
+          <p className="bg-blue-900 rounded-full px-4 py-2">J</p>
+        </Link>
+        <Image src={Notifications} width={32} alt="" />
+        <Image src={Add} width={32} alt="" />
       </div>
     </div>
   );

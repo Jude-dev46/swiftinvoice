@@ -50,9 +50,9 @@ const RecentInvoices = () => {
   return (
     <div className="bg-white w-[96%] lg:h-[400px] shadow-md rounded-md">
       <div className="bg-violet-200 rounded-tl-md rounded-tr-md p-4 flex justify-between">
-        <p className="text-black text-2xl font-bold">Recent Invoices</p>
+        <p className="text-black text-xl font-bold">Recent Invoices</p>
         <button
-          className="text-black text-2xl font-semibold"
+          className="text-black text-xl font-semibold"
           onClick={navigateToInvoicePage}
         >
           View All

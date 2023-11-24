@@ -1,4 +1,3 @@
-import React from "react";
 import Sidebar from "../components/dashboardUI/Sidebar";
 import Main from "../components/dashboardUI/Main";
 

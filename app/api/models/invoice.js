@@ -19,6 +19,10 @@ const invoiceSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    overdue: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

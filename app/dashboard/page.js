@@ -3,7 +3,7 @@ import Main from "../components/dashboardUI/Main";
 
 const Dashboard = () => {
   return (
-    <div className="h-[100svh] flex w-full">
+    <div className="h-full lg:h-[100svh] flex w-full relative">
       <Sidebar />
       <Main />
     </div>

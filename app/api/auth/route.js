@@ -23,6 +23,7 @@ export async function POST(request) {
     }
 
     const foundUser = await User.findOne({ email, password });
+    console.log(foundUser);
 
     if (foundUser) {
       return NextResponse.json(

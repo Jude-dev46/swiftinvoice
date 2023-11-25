@@ -2,7 +2,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 
 import { useSelector } from "react-redux";
 
-const Modal = () => {
+const Modal = ({ isCreateInvoice }) => {
   const isLoading = useSelector((state) => state.ui.isLoading);
 
   return (
@@ -32,6 +32,7 @@ const Modal = () => {
             Login
           </button>
         )}
+        {isCreateInvoice && ""}
       </div>
     </div>
   );

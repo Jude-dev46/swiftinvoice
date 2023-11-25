@@ -1,92 +1,219 @@
-import Image from "next/image";
-import Link from "next/link";
+"use client";
 
-import Account from "../../../public/account.svg";
-import Cards from "../../../public/cards.svg";
-import Clients from "../../../public/clients.svg";
-import History from "../../../public/history.svg";
+import Link from "next/link";
+import Image from "next/image";
+import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
+
 import Home from "../../../public/home.svg";
+import Cards from "../../../public/cards.svg";
+import Account from "../../../public/account.svg";
 import Logo from "../../../public/logo-text.svg";
+import Clients from "../../../public/clients.svg";
 import Invoices from "../../../public/invoice.svg";
-import Notifications from "../../../public/notifications.svg";
-import Services from "../../../public/services.svg";
 import Settings from "../../../public/settings.svg";
+import Notifications from "../../../public/notifications.svg";
+// import History from "../../../public/history.svg";
+// import Services from "../../../public/services.svg";
 
 const Sidebar = () => {
-  return (
-    <div className="bg-neutral-100 hidden lg:block w-2.5/12 p-8 flex flex-col items-center justify-between">
-      <div className="mb-5">
-        <Image src={Logo} width={227} height={120} alt="" priority={true} />
-      </div>
-      <div className="h-[75%]">
-        <Link
-          href="/"
-          className="text-blue-900 text-3xl font-bold flex items-center gap-4 mb-6"
-        >
-          <Image src={Home} width={24} alt="" />
-          <p className="text-xl">Dashboard</p>
-        </Link>
-        <Link
-          href="/invoices"
-          className="text-black text-3xl font-bold flex items-center gap-4 mb-6"
-        >
-          <Image src={Invoices} width={24} alt="" />
-          <p className="text-xl">Invoices</p>
-        </Link>
+  const pathname = usePathname();
+  const isOpen = useSelector((state) => state.ui.isOpen);
+  console.log(isOpen);
 
-        <Link
-          href="/clients"
-          className="text-black text-3xl font-bold flex items-center gap-4 mb-6"
-        >
-          <Image src={Clients} width={24} alt="" />
-          <p className="text-xl">Clients</p>
-        </Link>
-        <Link
+  return (
+    <>
+      <div
+        className={`bg-neutral-100 hidden lg:block h-[100svh] w-2.5/12 p-8 flex flex-col items-center justify-between`}
+      >
+        <div className="mb-5">
+          <Image src={Logo} width={227} height={120} alt="" priority={true} />
+        </div>
+        <div className="h-[75%] flex flex-col gap-4">
+          <Link
+            href="/dashboard"
+            className={`${
+              pathname === "/dashboard" ? "text-blue-900" : "text-black"
+            }  text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Home} width={24} alt="" />
+            <p className="text-xl">Dashboard</p>
+          </Link>
+          <Link
+            href="/invoices"
+            className={`${
+              pathname === "/invoices" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Invoices} width={24} alt="" />
+            <p className="text-xl">Invoices</p>
+          </Link>
+
+          <Link
+            href="/clients"
+            className={`${
+              pathname === "/clients" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Clients} width={24} alt="" />
+            <p className="text-xl">Clients</p>
+          </Link>
+          {/* <Link
           href="/history"
-          className="text-black text-3xl font-bold flex items-center gap-4 mb-6"
+          className={`${
+            pathname === "/history" ? "text-blue-900" : "text-black"
+          } text-3xl font-bold flex items-center gap-4 mb-6`}
         >
           <Image src={History} width={24} alt="" />
           <p className="text-xl">History</p>
         </Link>
         <Link
           href="/services"
-          className="text-black text-3xl font-bold flex items-center gap-4 mb-6"
+          className={`${
+            pathname === "/services" ? "text-blue-900" : "text-black"
+          } text-3xl font-bold flex items-center gap-4 mb-6`}
         >
           <Image src={Services} width={24} alt="" />
           <p className="text-xl">Services</p>
-        </Link>
-        <Link
-          href="/cards"
-          className="text-black text-3xl font-bold flex items-center gap-4 mb-6"
-        >
-          <Image src={Cards} width={24} alt="" />
-          <p className="text-xl">Cards</p>
-        </Link>
-        <Link
-          href="/notifications"
-          className="text-black text-3xl font-bold flex items-center gap-4 mb-6"
-        >
-          <Image src={Notifications} width={24} alt="" />
-          <p className="text-xl">Notifications</p>
-        </Link>
+        </Link> */}
+          <Link
+            href="/cards"
+            className={`${
+              pathname === "/cards" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Cards} width={24} alt="" />
+            <p className="text-xl">Cards</p>
+          </Link>
+          <Link
+            href="/notifications"
+            className={`${
+              pathname === "/notifications" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Notifications} width={24} alt="" />
+            <p className="text-xl">Notifications</p>
+          </Link>
+        </div>
+        <div className="w-full flex flex-col items-center border-t-2 border-neutral-200 pt-4">
+          <Link
+            href="/account"
+            className={`${
+              pathname === "/account" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Account} width={24} alt="" />
+            <p className="text-xl">Account</p>
+          </Link>
+          <Link
+            href="/settings"
+            className={`${
+              pathname === "/settings" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Settings} width={24} alt="" />
+            <p className="text-xl">Settings</p>
+          </Link>
+        </div>
       </div>
-      <div className="w-full flex flex-col items-center border-t-2 border-neutral-200 pt-4">
-        <Link
-          href="/account"
-          className="text-black text-3xl font-bold flex items-center gap-4 mb-6"
+
+      {/* Mobile Sidebar */}
+      <div
+        className={`absolute bg-neutral-100 ${
+          !isOpen ? "hidden" : "block"
+        } h-[100svh] lg:block w-2.5/12 p-8 flex flex-col items-center justify-between z-10`}
+      >
+        <div className="mb-5">
+          <Image src={Logo} width={227} height={120} alt="" priority={true} />
+        </div>
+        <div className="h-[75%] flex flex-col gap-4">
+          <Link
+            href="/dashboard"
+            className={`${
+              pathname === "/dashboard" ? "text-blue-900" : "text-black"
+            }  text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Home} width={24} alt="" />
+            <p className="text-xl">Dashboard</p>
+          </Link>
+          <Link
+            href="/invoices"
+            className={`${
+              pathname === "/invoices" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Invoices} width={24} alt="" />
+            <p className="text-xl">Invoices</p>
+          </Link>
+
+          <Link
+            href="/clients"
+            className={`${
+              pathname === "/clients" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Clients} width={24} alt="" />
+            <p className="text-xl">Clients</p>
+          </Link>
+          {/* <Link
+          href="/history"
+          className={`${
+            pathname === "/history" ? "text-blue-900" : "text-black"
+          } text-3xl font-bold flex items-center gap-4 mb-6`}
         >
-          <Image src={Account} width={24} alt="" />
-          <p className="text-xl">Account</p>
+          <Image src={History} width={24} alt="" />
+          <p className="text-xl">History</p>
         </Link>
         <Link
-          href="/settings"
-          className="text-black text-3xl font-bold flex items-center gap-4 mb-6"
+          href="/services"
+          className={`${
+            pathname === "/services" ? "text-blue-900" : "text-black"
+          } text-3xl font-bold flex items-center gap-4 mb-6`}
         >
-          <Image src={Settings} width={24} alt="" />
-          <p className="text-xl">Settings</p>
-        </Link>
+          <Image src={Services} width={24} alt="" />
+          <p className="text-xl">Services</p>
+        </Link> */}
+          <Link
+            href="/cards"
+            className={`${
+              pathname === "/cards" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Cards} width={24} alt="" />
+            <p className="text-xl">Cards</p>
+          </Link>
+          <Link
+            href="/notifications"
+            className={`${
+              pathname === "/notifications" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Notifications} width={24} alt="" />
+            <p className="text-xl">Notifications</p>
+          </Link>
+        </div>
+        <div className="w-full flex flex-col items-center border-t-2 border-neutral-200 pt-4">
+          <Link
+            href="/account"
+            className={`${
+              pathname === "/account" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Account} width={24} alt="" />
+            <p className="text-xl">Account</p>
+          </Link>
+          <Link
+            href="/settings"
+            className={`${
+              pathname === "/settings" ? "text-blue-900" : "text-black"
+            } text-3xl font-bold flex items-center gap-4 mb-6`}
+          >
+            <Image src={Settings} width={24} alt="" />
+            <p className="text-xl">Settings</p>
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -23,7 +23,6 @@ export async function POST(request) {
     }
 
     const foundUser = await User.findOne({ email, password });
-    console.log(foundUser);
 
     if (foundUser) {
       return NextResponse.json(
@@ -41,6 +40,7 @@ export async function POST(request) {
       email: email,
       password: hashPassword,
     });
+    console.log(newUser);
 
     await newUser.save();
     return NextResponse.json(

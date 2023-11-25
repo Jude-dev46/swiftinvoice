@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 
+import part1 from "../../../public/Image.png";
+import part2 from "../../../public/Image2.png";
 import Home from "../../../public/home.svg";
 import Cards from "../../../public/cards.svg";
 import Account from "../../../public/account.svg";
@@ -19,7 +21,6 @@ import Notifications from "../../../public/notifications.svg";
 const Sidebar = () => {
   const pathname = usePathname();
   const isOpen = useSelector((state) => state.ui.isOpen);
-  console.log(isOpen);
 
   return (
     <>
@@ -121,10 +122,17 @@ const Sidebar = () => {
       <div
         className={`absolute bg-neutral-100 ${
           !isOpen ? "hidden" : "block"
-        } h-[100svh] lg:block w-2.5/12 p-8 flex flex-col items-center justify-between z-10`}
+        } h-[100svh] lg:block w-2.5/12 p-8 flex flex-col items-start justify-between z-10`}
       >
-        <div className="mb-5">
-          <Image src={Logo} width={227} height={120} alt="" priority={true} />
+        <div className="mb-8">
+          <Image src={part1} width={24} height={24} className="" alt="" />
+          <Image
+            src={part2}
+            width={24}
+            height={24}
+            alt=""
+            className="-mt-[10px]"
+          />
         </div>
         <div className="h-[75%] flex flex-col gap-4">
           <Link
@@ -134,7 +142,7 @@ const Sidebar = () => {
             }  text-3xl font-bold flex items-center gap-4 mb-6`}
           >
             <Image src={Home} width={24} alt="" />
-            <p className="text-xl">Dashboard</p>
+            {/* <p className="text-xl">Dashboard</p> */}
           </Link>
           <Link
             href="/invoices"
@@ -143,7 +151,7 @@ const Sidebar = () => {
             } text-3xl font-bold flex items-center gap-4 mb-6`}
           >
             <Image src={Invoices} width={24} alt="" />
-            <p className="text-xl">Invoices</p>
+            {/* <p className="text-xl">Invoices</p> */}
           </Link>
 
           <Link
@@ -153,7 +161,7 @@ const Sidebar = () => {
             } text-3xl font-bold flex items-center gap-4 mb-6`}
           >
             <Image src={Clients} width={24} alt="" />
-            <p className="text-xl">Clients</p>
+            {/* <p className="text-xl">Clients</p> */}
           </Link>
           {/* <Link
           href="/history"
@@ -180,7 +188,7 @@ const Sidebar = () => {
             } text-3xl font-bold flex items-center gap-4 mb-6`}
           >
             <Image src={Cards} width={24} alt="" />
-            <p className="text-xl">Cards</p>
+            {/* <p className="text-xl">Cards</p> */}
           </Link>
           <Link
             href="/notifications"
@@ -189,10 +197,10 @@ const Sidebar = () => {
             } text-3xl font-bold flex items-center gap-4 mb-6`}
           >
             <Image src={Notifications} width={24} alt="" />
-            <p className="text-xl">Notifications</p>
+            {/* <p className="text-xl">Notifications</p> */}
           </Link>
         </div>
-        <div className="w-full flex flex-col items-center border-t-2 border-neutral-200 pt-4">
+        <div className="w-full flex flex-col items-start border-t-2 border-neutral-200 pt-4">
           <Link
             href="/account"
             className={`${
@@ -200,7 +208,7 @@ const Sidebar = () => {
             } text-3xl font-bold flex items-center gap-4 mb-6`}
           >
             <Image src={Account} width={24} alt="" />
-            <p className="text-xl">Account</p>
+            {/* <p className="text-xl">Account</p> */}
           </Link>
           <Link
             href="/settings"
@@ -209,7 +217,7 @@ const Sidebar = () => {
             } text-3xl font-bold flex items-center gap-4 mb-6`}
           >
             <Image src={Settings} width={24} alt="" />
-            <p className="text-xl">Settings</p>
+            {/* <p className="text-xl">Settings</p> */}
           </Link>
         </div>
       </div>

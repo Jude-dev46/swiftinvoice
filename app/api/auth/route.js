@@ -9,6 +9,7 @@ export async function POST(request) {
   try {
     const body = await request.json();
     const { businessName, businessField, email, password } = body;
+    
 
     const hashPassword = await bcrypt.hash(password, 10);
 
@@ -21,7 +22,7 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-
+   
     const foundUser = await User.findOne({ email, password });
 
     if (foundUser) {

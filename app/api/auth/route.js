@@ -9,31 +9,17 @@ export async function POST(request) {
   try {
     const body = await request.json();
     const { businessName, businessField, email, password } = body;
-    
 
-    const hashPassword = await bcrypt.hash(password, 10);
-
-    if (!businessName || !businessField || !email || !hashPassword) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: "Bad request sent!",
-        },
-        { status: 400 }
-      );
-    }
-   
-    const foundUser = await User.findOne({ email, password });
+    const foundUser = await User.findOne({ email });
 
     if (foundUser) {
-      return NextResponse.json(
-        {
-          status: true,
-          message: "This user already exists! Kindly login.",
-        },
-        { status: 409 }
-      );
+      return NextResponse.json({
+        status: false,
+        message: "This user is already registered! Kindly login.",
+      });
     }
+
+    const hashPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User({
       businessName: businessName,
@@ -41,21 +27,15 @@ export async function POST(request) {
       email: email,
       password: hashPassword,
     });
-    console.log(newUser);
 
     await newUser.save();
-    return NextResponse.json(
-      {
-        status: true,
-        message: "User registered successfully!",
-        data: newUser,
-      },
-      { status: 201 }
-    );
+    return NextResponse.json({
+      status: true,
+      message: "Successfully logged in user",
+      data: newUser,
+    });
   } catch (error) {
-    NextResponse.json(
-      { status: false, message: "An error occurred!" },
-      { status: 500 }
-    );
+    console.log(error);
+    return NextResponse.json({ status: false, message: "An error occurred!" });
   }
 }

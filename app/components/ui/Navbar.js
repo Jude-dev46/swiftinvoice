@@ -1,22 +1,19 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-
 import logo from "../../../public/logo-text.svg";
-
 const Navbar = () => {
   return (
     <div>
-      <div className="px-4 sm:px-8 py-4 flex justify-start bg-neutral-100 bg-opacity-50 backdrop-blur-[10px]">
-        <Link href="/">
+       <Link href="/">
+        <div className="bg-neutral-100 bg-opacity-50 backdrop-blur-[10px] flex flex-row items-center fixed w-full px-5 py-3 lg:py-4 lg:px-8">
           <Image
             src={logo}
-            alt="logo"
-            className=" w-[8.5rem] sm:w-auto h-10 sm:h-19"
-            priority={true}
+            alt=""
+            className=" w-[14rem] lg:w-[20rem] lg:h-14 sm:w-auto h-10 sm:h-19"
           />
-        </Link>
-      </div>
+        </div>
+      </Link>
     </div>
   );
 };

@@ -4,23 +4,14 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import part1 from "../public/Image.png";
-import part2 from "../public/Image2.png";
-import Logo from "../public/logo-text.svg";
+import part1 from "../public/Image2.png";
+import part2 from "../public/Image.png";
+// import text from "../public/text.png";
+// import Logo from "../public/logo-text.svg";
 
 function welcomePage() {
   return (
     <div className="">
-      <Link href="/">
-        <div className="bg-neutral-100 bg-opacity-50 backdrop-blur-[10px] flex flex-row items-center fixed w-full px-8 py-1 lg:py-4 lg:px-8">
-          <Image
-            src={Logo}
-            alt=""
-            className=" w-[8.5rem] sm:w-auto h-10 sm:h-19"
-          />
-        </div>
-      </Link>
-
       <div className="h-[100vh] bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 flex flex-col justify-center items-center pt-10">
         <div>
           <Image src={part1} width={80} height={80} className="" alt="" />
@@ -46,7 +37,7 @@ function welcomePage() {
             Invoice Keeping. Made Easy.
           </p>
           <Link href="/auth">
-            <button className="font-bold bg-yellow-500 px-10 lg:px-24 py-1 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2">
+            <button className="font-bold text-black bg-yellow-500 px-10 lg:px-24 py-1 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2">
               Open free account
             </button>
           </Link>

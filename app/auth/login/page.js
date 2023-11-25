@@ -24,8 +24,8 @@ const Login = () => {
   // const isModalOpen = useSelector((state) => state.ui.isModalOpen);
 
   async function loginHandler(e) {
+    e.preventDefault();
     try {
-      e.preventDefault();
       dispatch(uiActions.setIsLoading(true));
 
       const enteredData = {

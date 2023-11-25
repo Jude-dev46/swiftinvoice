@@ -41,16 +41,15 @@ const Signup = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data, e) => {
-    e.preventDefault();
-
+  const onSubmit = async (data) => {
     console.log(data);
     try {
       const res = await axios.post("/api/auth", data);
+      console.log(res);
 
-      if (res.status) {
-        router.push("/auth/login");
-      }
+      // if (res.status) {
+      //   router.push("/auth/login");
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -99,7 +98,7 @@ const Signup = () => {
                   id="bname"
                   placeholder="e.g Benny's cakes"
                   className="bg-transparent border-2 border-black rounded-md outline-none px-2 py-1.5 text-lg lg:text-xl text-black"
-                  {...register("businessname")}
+                  {...register("businessName")}
                 />
               </div>
 
@@ -110,7 +109,7 @@ const Signup = () => {
                   id="bfield"
                   placeholder="e.g Cathering"
                   className="bg-transparent border-2 border-black rounded-md outline-none px-2 py-1.5 text-lg lg:text-xl text-black"
-                  {...register("businessfield")}
+                  {...register("businessField")}
                 />
               </div>
 
@@ -214,9 +213,9 @@ const Signup = () => {
               <div className="w-full">
                 <button
                   className={
-                    state
-                      ? "w-full opacity-40 text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2"
-                      : "w-full text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2"
+                    state === 1
+                      ? "w-full text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2"
+                      : "w-full opacity-40 text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2"
                   }
                 >
                   Sign Up

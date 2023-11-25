@@ -122,7 +122,7 @@ const Sidebar = () => {
       <div
         className={`absolute bg-neutral-100 ${
           !isOpen ? "hidden" : "block"
-        } h-[100svh] lg:block w-2.5/12 p-8 flex flex-col items-start justify-between z-10`}
+        } h-[100svh] lg:hidden w-2.5/12 p-8 flex flex-col items-start justify-between z-10`}
       >
         <div className="mb-8">
           <Image src={part1} width={24} height={24} className="" alt="" />

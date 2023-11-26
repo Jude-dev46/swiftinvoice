@@ -25,7 +25,7 @@ const MainHeader = ({ welcomeText }) => {
       <h1 className="text-1xl md:text-4xl text-black font-bold">
         {welcomeText}
       </h1>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 lg:mr-10">
         <div className="hidden md:block">
           <p className="text-black text-sm md:text-1xl font-semibold flex flex-col">
             John James<span className="text-right">Admin</span>
@@ -34,7 +34,6 @@ const MainHeader = ({ welcomeText }) => {
         <Link href="/account">
           <p className="bg-blue-900 rounded-full px-4 py-2">J</p>
         </Link>
-        <Image src={Notifications} width={24} alt="" />
         <Image
           src={Menu}
           width={32}

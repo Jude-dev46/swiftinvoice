@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import naija from '../../public/naija.png';
 import { useForm } from 'react-hook-form';
@@ -7,8 +7,12 @@ import Link from 'next/link';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from 'axios';
-
+import { useRouter } from 'next/navigation';
 const Signup = () => {
+  
+  const [state, setState] = useState(0);
+  const router = useRouter()
+
   const schema = yup.object().shape({
     businessName: yup.string().required('Business Name is required'),
     businessField: yup.string().required('Business Field is required'),
@@ -17,32 +21,34 @@ const Signup = () => {
     phoneNo: yup.string().required('Phone number is required'),
     password: yup.string().min(6, 'Password is too short').required('Password is required'),
     confirm: yup
-      .string()
-      .required('Confirm your password')
-      .oneOf([yup.ref('password')], 'Passwords do not match'),
+    .string()
+    .required('Confirm your password')
+    .oneOf([yup.ref('password')], 'Passwords do not match'),
   });
-
+  
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
+  
+  const handleButton = (e) => {
+    e.preventDefault();
+    setState((prev) => prev + 1)
+  };
 
   const onSubmit = async(data, e) => {
     e.preventDefault();
-    alert("Hello")
-    console.log(data)
     try {
       const res = await axios.post('/api/auth',data)
-      console.log(res)
+      console.log(res.data)
+      if(res.data.status === true){
+          router.push("/auth/login")
+      }
     } catch (error) {
-        console.log(error)
+      console.error(error);
     }
   };
 
-  const [state, setState] = useState(0);
-  const handleButton = (e) => {
-    e.preventDefault();
-    setState((prev) => prev + 1);
-  };
+
 
   return (
     <div className="h-[100vh] bg-gradient-to-br from-orange-100 via-red-100 to-violet-100 pt-28 w-full flex flex-col justify-center items-center">
@@ -76,7 +82,7 @@ const Signup = () => {
                 id="bname"
                 placeholder="e.g Benny's cakes"
                 className="bg-transparent border-2 border-black rounded-md outline-none px-2 py-1.5 text-lg lg:text-xl text-black"
-                {...register('businessname')}
+                {...register('businessName')}
               />
             </div>
 
@@ -87,7 +93,7 @@ const Signup = () => {
                 id="bfield"
                 placeholder="e.g Cathering"
                 className="bg-transparent border-2 border-black rounded-md outline-none px-2 py-1.5 text-lg lg:text-xl text-black"
-                {...register('businessfield')}
+                {...register('businessField')}
               />
             </div>
 
@@ -134,7 +140,7 @@ const Signup = () => {
                <p className="text-black text-sm h-3 w-full">*This is a required field</p>
             </div>
             <div className="w-full">
-              <button
+              <p
                 onClick={handleButton}
                 id="nextBtn"
                 className={
@@ -143,7 +149,7 @@ const Signup = () => {
                     : 'w-full text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2'
                 }>
                 Next
-              </button>
+              </p>
             </div>
           </div>
         )}
@@ -178,11 +184,10 @@ const Signup = () => {
             <div className="w-full">
             
                 <button
-                    className={
-                      state
-                        ? 'w-full opacity-40 text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2'
-                        : 'w-full text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2'
-                    }>
+                   type='submit'
+                    className=
+                  'w-full text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2'
+                  >
                     Sign Up
                 </button>
              

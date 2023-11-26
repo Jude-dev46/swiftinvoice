@@ -41,7 +41,7 @@ export async function POST(request) {
       email: email,
       password: hashPassword,
     });
-    console.log(newUser);
+    // console.log(newUser);
 
     await newUser.save();
     return NextResponse.json(
@@ -53,8 +53,9 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
-    NextResponse.json(
-      { status: false, message: "An error occurred!" },
+    console.error("Error:", error);
+    return NextResponse.json(
+      { status: false, message: "An error occurred!" ,error: error.message },
       { status: 500 }
     );
   }

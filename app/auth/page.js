@@ -3,10 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-// import Image from "next/image";
 
 import Navbar from "../components/ui/Navbar";
-import naija from "../../public/naija.png";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

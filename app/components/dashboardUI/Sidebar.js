@@ -96,7 +96,7 @@ const Sidebar = () => {
             <p className="text-xl">Notifications</p>
           </Link>
         </div>
-        <div className="w-full flex flex-col items-center border-t-2 border-neutral-200 pt-4">
+        <div className="w-full flex flex-col items-start border-t-2 border-neutral-200 pt-4">
           <Link
             href="/account"
             className={`${

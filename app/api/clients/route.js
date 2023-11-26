@@ -2,29 +2,14 @@ import { NextResponse } from "next/server";
 
 const Client = require("../models/client");
 const User = require("../models/user");
-// const uuid = require("uuid").v4;
+const stripe = require("stripe")(process.env.STRIPE_API_KEY);
+const InitiatetMongoServer = require("../config/db");
 
-export async function GET() {
-  try {
-    const foundClients = await Client.find({});
-
-    return NextResponse.json({
-      status: true,
-      message: "Successfully retrieved clients!",
-      data: foundClients,
-    });
-  } catch (error) {
-    return NextResponse.json({ status: false, message: "An error occurred!" });
-  }
-}
-
+InitiatetMongoServer();
 export async function POST(req) {
   try {
     const body = await req.json();
     const { bussinessEmail, clientName, email, phoneNo } = body;
-
-    const foundClient = await Client.findOne({ email });
-    const currentUser = await User.findOne({ bussinessEmail });
 
     if (!clientName || !email || !phoneNo) {
       return NextResponse.json(
@@ -32,16 +17,31 @@ export async function POST(req) {
         { status: 400 }
       );
     }
+
+    const foundClient = await Client.findOne({ email });
+    const currentUser = await User.findOne({ bussinessEmail });
+
+    const createdBy = {
+      bussinessName: currentUser.businessName,
+      bussinessEmail: currentUser.email,
+    };
+
     if (foundClient) {
       return NextResponse.json(
-        { status: false, message: "This client exists!" },
+        { status: false, message: "This client already exists!" },
         { status: 409 }
       );
     }
 
+    const client = await stripe.customers.create({
+      name: bussinessEmail,
+      email: email,
+      phone: phoneNo,
+    });
+
     const newClient = await Client({
       clientName: clientName,
-      clientId: currentUser._id,
+      clientId: client.id,
       email: email,
       phoneNo: phoneNo,
     });
@@ -52,10 +52,12 @@ export async function POST(req) {
         status: true,
         message: "Successfully created client!",
         data: newClient,
+        createdBy: createdBy,
       },
       { status: 201 }
     );
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ status: false, message: "An error occurred!" });
   }
 }
@@ -64,6 +66,15 @@ export async function PATCH(req) {
   try {
     const body = await req.json();
     const { email } = body;
+
+    const foundClient = await Client.findOne({ email });
+
+    if (!foundClient) {
+      return NextResponse.json({
+        status: false,
+        message: "This client does not exists!",
+      });
+    }
 
     await Client.updateOne({ email }, body);
     return NextResponse.json({

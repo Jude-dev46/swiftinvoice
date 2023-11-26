@@ -4,8 +4,7 @@ const clientSchema = new mongoose.Schema(
   {
     clientName: { type: String, required: true, unique: true },
     clientId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
       required: true,
     },
     email: { type: String, required: true, unique: true },

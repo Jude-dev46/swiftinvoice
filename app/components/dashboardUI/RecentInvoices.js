@@ -1,8 +1,14 @@
 "use client";
-
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const RecentInvoices = ({ title, isInvoice }) => {
+// import Close from "../../../public/close.svg";
+import Delete from "../../../public/delete.svg";
+import Send from "../../../public/send.svg";
+import Update from "../../../public/update.svg";
+import Image from "next/image";
+
+const RecentInvoices = ({ title, isInvoice, handleShow }) => {
   const router = useRouter();
 
   const DUMMY_INVOICES = [
@@ -62,9 +68,9 @@ const RecentInvoices = ({ title, isInvoice }) => {
   }
 
   return (
-    <div className="bg-white w-[98%] md:w-[100%] lg:w-[96%] lg:h-[400px] shadow-md rounded-md">
+    <div className="bg-white w-[98%] md:w-[100%] lg:w-[96%] lg:h-[400px] shadow-md rounded-md relative">
       <div className="bg-violet-200 rounded-tl-md rounded-tr-md p-4 flex justify-between">
-        <p className="text-black text-xl font-bold">{title}</p>
+        <p className="text-black text-xl font-bold lg:ml-[12px]">{title}</p>
         {!isInvoice && (
           <button
             className="text-black text-xl font-semibold hover:text-blue-600"
@@ -75,28 +81,32 @@ const RecentInvoices = ({ title, isInvoice }) => {
         )}
         {isInvoice && (
           <div className="flex gap-4">
-            <button className="text-black text-xl font-semibold">filter</button>
-            <button className="text-black text-xl font-semibold hover:text-blue-600">
-              create
-            </button>
+            <div>
+              <button
+                onClick={handleShow}
+                className="text-black text-xl font-semibold lg:mr-[12px] hover:text-blue-600"
+              >
+                Create
+              </button>
+            </div>
           </div>
         )}
       </div>
       <div className="overflow-y-scroll max-h-[85%]">
-        <div className="w-full flex justify-between items-center text-black font-bold px-2 md:px-8 py-4">
-          <p className="w-fit md:w-[20%] text-left">ID</p>
-          <p className="w-fit md:w-[20%] text-left">Client</p>
-          <p className="w-fit md:w-[20%] text-left">Amount</p>
-          <p className="w-fit md:w-[20%] text-left">DueDate</p>
-          <p className="w-fit md:w-[20%] text-left">Status</p>
+        <div className="w-full grid grid-cols-5 justify-between items-center text-black font-bold px-2 md:px-8 py-4">
+          <p className="text-left">ID</p>
+          <p className="text-left">Client</p>
+          <p className="text-left">Amount</p>
+          <p className="text-left">DueDate</p>
+          <p className="text-left">Status</p>
         </div>
         {DUMMY_INVOICES.map((invoice) => (
-          <div key={invoice.id}>
-            <div className="w-full flex justify-between text-black font-bold px-2 md:px-8 py-4 border-b-2 border-neutral-200">
-              <p className="w-fit md:w-[20%] text-left">{invoice.id}</p>
-              <p className="w-fit md:w-[20%] text-left">{invoice.client}</p>
-              <p className="w-fit md:w-[20%] text-left">${invoice.amount}</p>
-              <p className="w-fit md:w-[20%] text-left">{invoice.dueDate}</p>
+          <div key={invoice.id} className="flex items-center justify-between">
+            <div className="w-full grid grid-cols-5 justify-between items-center text-black font-bold px-2 md:px-8 py-4 border-b-2 border-neutral-200">
+              <p className="w-fit text-left">{invoice.id}</p>
+              <p className="w-fit text-left">{invoice.client}</p>
+              <p className="w-fit text-left">${invoice.amount}</p>
+              <p className="w-fit text-left">{invoice.dueDate}</p>
               <p
                 className={`w-fit md:w-[20%] text-left ${
                   invoice.isPaid === "Unpaid"
@@ -107,6 +117,19 @@ const RecentInvoices = ({ title, isInvoice }) => {
                 {invoice.isPaid}
               </p>
             </div>
+            {isInvoice && (
+              <div className="flex items-center gap-2">
+                <button>
+                  <Image src={Update} width={24} alt="" />
+                </button>
+                <button>
+                  <Image src={Send} width={24} alt="" />
+                </button>
+                <button>
+                  <Image src={Delete} width={24} alt="" />
+                </button>
+              </div>
+            )}
           </div>
         ))}
       </div>

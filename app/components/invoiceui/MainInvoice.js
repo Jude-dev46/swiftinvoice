@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MainHeader from "../dashboardUI/MainHeader";
 import RecentInvoices from "../dashboardUI/RecentInvoices";
 
-const MainInvoice = () => {
+const MainInvoice = ({ handleShow }) => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.ui.isOpen);
 
@@ -20,7 +20,11 @@ const MainInvoice = () => {
     >
       <MainHeader welcomeText={"Invoices"} />
       <div onClick={() => dispatch(uiActions.setIsOpen(false))}>
-        <RecentInvoices title={"Invoices"} isInvoice={true} />
+        <RecentInvoices
+          title={"Invoices"}
+          isInvoice={true}
+          handleShow={handleShow}
+        />
       </div>
     </div>
   );

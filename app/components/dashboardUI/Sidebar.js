@@ -22,10 +22,16 @@ const Sidebar = () => {
   const pathname = usePathname();
   const isOpen = useSelector((state) => state.ui.isOpen);
 
+  if (isOpen) {
+    document.body.classList.add("overflow-hidden");
+  } else {
+    document.body.classList.remove("overflow-hidden");
+  }
+
   return (
     <>
       <div
-        className={`bg-neutral-100 hidden lg:block h-[100svh] w-2.5/12 p-8 flex flex-col items-center justify-between`}
+        className={`bg-neutral-100 hidden lg:block h-[100svh] w-2.5/12 p-8 flex  flex-col items-center justify-between`}
       >
         <div className="mb-5">
           <Image src={Logo} width={227} height={120} alt="" priority={true} />
@@ -96,7 +102,7 @@ const Sidebar = () => {
             <p className="text-xl">Notifications</p>
           </Link>
         </div>
-        <div className="w-full flex flex-col items-start border-t-2 border-neutral-200 pt-4">
+        <div className="w-full flex flex-col border-t-2 border-neutral-200 pt-4">
           <Link
             href="/account"
             className={`${

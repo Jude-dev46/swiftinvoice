@@ -1,6 +1,6 @@
 "use client";
-import MainHeader from "./dashboardUI/MainHeader";
-import ClientInvoice from "./invoiceui/ClientInvoice";
+import MainHeader from "../dashboardUI/MainHeader";
+import ClientInvoice from "../invoiceui/ClientInvoice";
 
 const MainClient = () => {
   return (

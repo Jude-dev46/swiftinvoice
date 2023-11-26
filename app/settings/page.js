@@ -1,14 +1,14 @@
 "use client";
 import Sidebar from "../components/dashboardUI/Sidebar";
-import MainClient from "../components/clientui/MainClient";
+import MainSettings from "../components/settingsui/MainSettings";
 
-const Clients = () => {
+const page = () => {
   return (
     <div className="h-full lg:h-[100svh] flex w-full relative">
-      <Sidebar />
-      <MainClient />
+        <Sidebar />
+        <MainSettings />
     </div>
-  );
-};
+  )
+}
 
-export default Clients;
+export default page

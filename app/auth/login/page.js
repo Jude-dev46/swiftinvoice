@@ -113,7 +113,7 @@ const Login = () => {
                 </label>
                 <input
                   id="password"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-lg focus:border-[#FFB600] focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-[#ffe08a]"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-lg focus:border-[#FFB600] focus:ring-opacity-40 focus:outline-none  focus:ring-[#ffe08a]"
                   type="password"
                   ref={passwordInputRef}
                   placeholder="Password"

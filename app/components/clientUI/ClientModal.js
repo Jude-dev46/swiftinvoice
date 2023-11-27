@@ -1,15 +1,15 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { uiActions } from "../store/uislice";
 import { AiOutlineLoading } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 
-const ModalUI = ({ show, handleClose }) => {
+const ClientModal = ({ show, handleClose }) => {
+  const [content, setContent] = useState("");
   const dispatch = useDispatch();
-  const titleInputRef = useRef();
-  const amountInputRef = useRef();
+  const nameInputRef = useRef();
   const emailInputRef = useRef();
-  const dateInputRef = useRef();
+  const phoneNoInputRef = useRef();
 
   const isError = useSelector((state) => state.ui.isError);
   const isLoading = useSelector((state) => state.ui.isLoading);
@@ -29,29 +29,29 @@ const ModalUI = ({ show, handleClose }) => {
     const parsedData = JSON.parse(storedData);
 
     const enteredData = {
-      userId: parsedData.userId,
-      amount: amountInputRef.current.value,
-      clientEmail: emailInputRef.current.value,
-      dueDate: dateInputRef.current.value,
+      businessEmail: parsedData.email,
+      clientName: nameInputRef.current.value,
+      email: emailInputRef.current.value,
+      phoneNo: +phoneNoInputRef.current.value,
     };
 
-    const userIdIsValid = enteredData.userId.trim().length > 0;
-    const amountIsValid = enteredData.amount > 0;
-    const emailIsValid = enteredData.clientEmail.includes("@");
-    const dueDate = enteredData.dueDate.trim().length > 0;
+    const businessEmailIsValid = enteredData.businessEmail.trim().length > 0;
+    const clientNameIsValid = enteredData.clientName.trim().length > 0;
+    const emailIsValid = enteredData.email.includes("@");
+    const phoneNoIsValid = enteredData.phoneNo > 0;
 
-    if (!userIdIsValid || !amountIsValid || !emailIsValid || !dueDate) {
+    if (
+      !businessEmailIsValid ||
+      !clientNameIsValid ||
+      !emailIsValid ||
+      !phoneNoIsValid
+    ) {
       alert("Invalid inputs");
     }
 
     try {
-      const params = {
-        ...enteredData,
-        isPaid: false,
-        overdue: false,
-        businessEmail: parsedData.email,
-      };
-      const res = await fetch("/api/invoices", {
+      const params = { ...enteredData };
+      const res = await fetch("/api/clients", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,17 +62,21 @@ const ModalUI = ({ show, handleClose }) => {
       const data = await res.json();
       console.log(data);
       if (!data.status) {
+        setContent(data.message);
         dispatch(uiActions.setIsError(true));
         dispatch(uiActions.setIsLoading(false));
         return;
       }
+      setContent(data.message);
       handleClose();
-    } catch (error) {}
+    } catch (error) {
+      dispatch(uiActions.setIsError(true));
+    }
   }
 
   return (
     <div className="bg-[rgb(0,0,0,0.7)] fixed w-full h-screen top-0 left-0 flex flex-col justify-center items-center z-20 overflow-hidden">
-      <div className="bg-white relative flex flex-col border rounded-lg p-3 z-10">
+      <div className="bg-white relative flex flex-col border rounded-lg p-6 z-10">
         <div
           onClick={handleClose}
           className="w-12 mb-4 text-center text-blue-900 cursor-pointer hover:text-blue-950 hover:font-bold"
@@ -83,26 +87,15 @@ const ModalUI = ({ show, handleClose }) => {
         <Form className="text-black -mt-4">
           <Form.Group
             className="mb-3 flex flex-col"
-            controlId="exampleForm.ControlInput1"
+            controlId="exampleForm.ControlTextarea1"
           >
             <Form.Label className="text-black font-semibold">
-              Invoice title
+              Client Name
             </Form.Label>
             <Form.Control
               type="text"
               className="outline-0 px-2 py-1 bg-transparent border-2 border-slate-300 rounded-md"
-              ref={titleInputRef}
-            />
-          </Form.Group>
-          <Form.Group
-            className="mb-3 flex flex-col"
-            controlId="exampleForm.ControlTextarea1"
-          >
-            <Form.Label className="text-black font-semibold">Amount</Form.Label>
-            <Form.Control
-              type="number"
-              className="outline-0 px-2 py-1 bg-transparent border-2 border-slate-300 rounded-md"
-              ref={amountInputRef}
+              ref={nameInputRef}
             />
           </Form.Group>
           <Form.Group
@@ -123,12 +116,12 @@ const ModalUI = ({ show, handleClose }) => {
             controlId="exampleForm.ControlTextarea1"
           >
             <Form.Label className="text-black font-semibold">
-              Due Date
+              Client contact no.
             </Form.Label>
             <Form.Control
-              type="Date"
+              type="number"
               className="outline-0 px-2 py-1 bg-transparent border-2 border-slate-300 rounded-md"
-              ref={dateInputRef}
+              ref={phoneNoInputRef}
             />
           </Form.Group>
           <Form.Group className="mb-3 flex flex-col "></Form.Group>
@@ -147,10 +140,10 @@ const ModalUI = ({ show, handleClose }) => {
             "Create"
           )}
         </button>
-        {isError && <p className="text-red-600 text-md">An error occurred!</p>}
+        {isError && <p className="text-red-600 text-md">{content}</p>}
       </div>
     </div>
   );
 };
 
-export default ModalUI;
+export default ClientModal;

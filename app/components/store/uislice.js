@@ -5,6 +5,7 @@ const initialUiState = {
   isLoading: false,
   isOpen: false,
   isModalOpen: false,
+  isError: false,
 };
 
 const uiSlice = createSlice({
@@ -20,6 +21,9 @@ const uiSlice = createSlice({
     },
     setIsOpen(state, action) {
       state.isOpen = action.payload;
+    },
+    setIsError(state, action) {
+      state.isError = action.payload;
     },
     setIsLoading(state, action) {
       state.isLoading = action.payload;

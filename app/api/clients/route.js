@@ -6,6 +6,20 @@ const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 const InitiatetMongoServer = require("../config/db");
 
 InitiatetMongoServer();
+export async function GET() {
+  try {
+    const foundClients = await Client.find({});
+
+    return NextResponse.json({
+      status: true,
+      message: "Successfully retrieved clients!",
+      data: foundClients,
+    });
+  } catch (error) {
+    return NextResponse.json({ status: false, message: "An error occurred!" });
+  }
+}
+
 export async function POST(req) {
   try {
     const body = await req.json();
@@ -40,10 +54,12 @@ export async function POST(req) {
     });
 
     const newClient = await Client({
+      bussinessEmail: bussinessEmail,
       clientName: clientName,
       clientId: client.id,
       email: email,
       phoneNo: phoneNo,
+      createdBy: createdBy,
     });
 
     await newClient.save();

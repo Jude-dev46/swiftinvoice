@@ -1,74 +1,57 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { format, isToday, isYesterday, parseISO } from "date-fns";
 
-// import Close from "../../../public/close.svg";
-import Delete from "../../../public/delete.svg";
-import Send from "../../../public/send.svg";
-import Update from "../../../public/update.svg";
-import Image from "next/image";
-
-const RecentInvoices = ({ title, isInvoice, handleShow }) => {
+const RecentInvoices = ({
+  title,
+  isInvoice,
+  handleShow,
+  selectedValue,
+  invoices,
+}) => {
   const router = useRouter();
+  const [inv, setInv] = useState([]);
+  const [info, setInfo] = useState(false);
 
-  const DUMMY_INVOICES = [
-    {
-      id: 1,
-      client: "Jon Doe",
-      amount: 350,
-      dueDate: new Date().toLocaleDateString(),
-      isPaid: "Unpaid",
-    },
-    {
-      id: 2,
-      client: "John Doe",
-      amount: 200,
-      dueDate: new Date().toLocaleDateString(),
-      isPaid: "Paid",
-    },
-    {
-      id: 3,
-      client: "Oscar Doe",
-      amount: 4000,
-      dueDate: new Date().toLocaleDateString(),
-      isPaid: "Unpaid",
-    },
-    {
-      id: 4,
-      client: "Zack Doe",
-      amount: 350,
-      dueDate: new Date().toLocaleDateString(),
-      isPaid: "Paid",
-    },
-    {
-      id: 5,
-      client: "Moses Doe",
-      amount: 5000,
-      dueDate: new Date().toLocaleDateString(),
-      isPaid: "Pending",
-    },
-    {
-      id: 6,
-      client: "Moses Doe",
-      amount: 120,
-      dueDate: new Date().toLocaleDateString(),
-      isPaid: "Paid",
-    },
-    {
-      id: 7,
-      client: "Moses Doe",
-      amount: 800,
-      dueDate: new Date().toLocaleDateString(),
-      isPaid: "Pending",
-    },
-  ];
+  useEffect(() => {
+    setInfo(false);
+
+    if (!selectedValue) {
+      setInv(invoices);
+    } else if (selectedValue === "Unpaid") {
+      const unpaidInvoice = invoices.filter((inv) => !inv.isPaid);
+
+      if (unpaidInvoice) {
+        setInv(unpaidInvoice);
+      }
+    } else if (selectedValue === "Paid") {
+      const paidInvoice = invoices.filter((inv) => inv.isPaid);
+      setInv(paidInvoice);
+
+      if (invoices.length === 0) {
+        setInfo(true);
+      }
+    }
+  }, [selectedValue, invoices]);
+
+  function formatThreadDate(dateArg) {
+    if (isToday(parseISO(dateArg))) {
+      return "Today";
+    } else if (isYesterday(parseISO(dateArg))) {
+      return "Yesterday";
+    } else {
+      return format(parseISO(dateArg), "dd-mm-yy");
+    }
+  }
 
   function navigateToInvoicePage() {
     router.push("/invoices");
   }
 
   return (
-    <div className="bg-white w-[98%] md:w-[100%] lg:w-[96%] lg:h-[400px] shadow-md rounded-md relative">
+    <div className="bg-white w-[100%] md:w-[100%] lg:w-[96%] h-[80vh] lg:h-[400px] shadow-md rounded-md relative">
       <div className="bg-violet-200 rounded-tl-md rounded-tr-md p-4 flex justify-between">
         <p className="text-black text-xl font-bold lg:ml-[12px]">{title}</p>
         {!isInvoice && (
@@ -93,44 +76,38 @@ const RecentInvoices = ({ title, isInvoice, handleShow }) => {
         )}
       </div>
       <div className="overflow-y-scroll max-h-[85%]">
-        <div className="w-full grid grid-cols-5 justify-between items-center text-black font-bold px-2 md:px-8 py-4">
-          <p className="text-left">ID</p>
-          <p className="text-left">Client</p>
-          <p className="text-left">Amount</p>
-          <p className="text-left">DueDate</p>
-          <p className="text-left">Status</p>
+        <div className="w-full flex justify-between items-center text-black font-bold px-2 md:px-8 py-4">
+          <p className="w-fit md:w-fit text-right">ID</p>
+          <p className="w-fit md:w-fit text-right">Amount</p>
+          <p className="w-fit md:w-fit text-right">DueDate</p>
+          <p className="w-fit md:w-[20%] text-right">Status</p>
         </div>
-        {DUMMY_INVOICES.map((invoice) => (
-          <div key={invoice.id} className="flex items-center justify-between">
-            <div className="w-full grid grid-cols-5 justify-between items-center text-black font-bold px-2 md:px-8 py-4 border-b-2 border-neutral-200">
-              <p className="w-fit text-left">{invoice.id}</p>
-              <p className="w-fit text-left">{invoice.client}</p>
-              <p className="w-fit text-left">${invoice.amount}</p>
-              <p className="w-fit text-left">{invoice.dueDate}</p>
+        {info && (
+          <p className="flex justify-center text-center text-black font-bold">
+            No invoice available
+          </p>
+        )}
+        {inv.map((invoice) => (
+          <Link href={`/invoices/${invoice.invoiceId}`} key={invoice.invoiceId}>
+            <div className="w-full flex justify-between items-center text-black font-bold px-2 md:px-8 py-4 hover:bg-neutral-200">
+              <p className="w-fit md:w-fit text-right">
+                {invoice.invoiceId.slice(0, 5)}
+              </p>
+              <p className="w-fit md:w-fit text-right">
+                ${invoice.amount / 100}
+              </p>
+              <p className="w-fit md:w-fit text-right">
+                {formatThreadDate(invoice.dueDate)}
+              </p>
               <p
-                className={`w-fit md:w-[20%] text-left ${
-                  invoice.isPaid === "Unpaid"
-                    ? "text-red-500"
-                    : "text-green-800"
+                className={`w-fit md:w-[20%] text-right ${
+                  invoice.status ? "text-green-500" : "text-red-600"
                 }`}
               >
-                {invoice.isPaid}
+                {invoice.status ? "Paid" : "Unpaid"}
               </p>
             </div>
-            {isInvoice && (
-              <div className="flex items-center gap-2">
-                <button>
-                  <Image src={Update} width={24} alt="" />
-                </button>
-                <button>
-                  <Image src={Send} width={24} alt="" />
-                </button>
-                <button>
-                  <Image src={Delete} width={24} alt="" />
-                </button>
-              </div>
-            )}
-          </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -60,9 +60,10 @@ const Login = () => {
       const data = await res.json();
 
       const userData = {
-        businessName: data.businessName,
-        businessField: data.businessField,
-        email: data.email,
+        userId: data.data._id,
+        businessName: data.data.businessName,
+        businessField: data.data.businessField,
+        email: data.data.email,
       };
       localStorage.setItem("data", JSON.stringify(userData));
 

@@ -9,6 +9,7 @@ const clientSchema = new mongoose.Schema(
     },
     email: { type: String, required: true, unique: true },
     phoneNo: { type: Number, required: true, unique: false },
+    createdBy: { type: Object },
   },
   { timestamps: true }
 );

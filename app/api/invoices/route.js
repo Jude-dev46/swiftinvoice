@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 const invoice = require("../models/invoice");
+const client = require("../models/client");
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 const InitiatetMongoServer = require("../config/db");
 const uuid = require("uuid").v4;
@@ -10,7 +11,7 @@ export async function GET(_req) {
   try {
     const foundInvoices = await invoice.find(
       {},
-      "userId invoiceId amount dueDate isPaid overdue updatedAt"
+      "userId invoiceId amount businessEmail dueDate isPaid overdue updatedAt"
     );
 
     return NextResponse.json({
@@ -26,12 +27,21 @@ export async function GET(_req) {
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { userId, amount, dueDate, clientEmail, isPaid, overdue } = body;
+    const {
+      userId,
+      amount,
+      businessEmail,
+      dueDate,
+      clientEmail,
+      isPaid,
+      overdue,
+    } = body;
     const uuId = uuid().slice(-5);
     const invoiceId = "inv-" + uuId;
-    console.log(invoiceId);
 
     const foundInvoice = await invoice.findOne({ invoiceId }).maxTimeMS(20000);
+    const foundClients = await client.find({}, "clientName clientId email");
+    const foundClient = foundClients.filter((cli) => cli.email === clientEmail);
 
     if (foundInvoice) {
       return NextResponse.json(
@@ -43,16 +53,23 @@ export async function POST(req) {
       );
     }
 
+    if (!foundClient) {
+      return NextResponse.json({
+        status: false,
+        message: "Could not find client!",
+      });
+    }
+
     const product = await stripe.invoiceItems.create({
-      customer: clientEmail,
+      customer: foundClient[0].clientId,
       amount: amount,
       currency: "usd",
-      // price: invoiceId,
     });
 
     const newInvoice = await invoice({
       userId: userId,
       invoiceId: product.id,
+      businessEmail: businessEmail,
       clientEmail: clientEmail,
       amount: amount,
       dueDate: dueDate,

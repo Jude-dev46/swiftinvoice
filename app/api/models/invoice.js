@@ -15,6 +15,7 @@ const invoiceSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    businessEmail: { type: String, required: true },
     dueDate: {
       type: Date,
       required: true,

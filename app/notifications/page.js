@@ -1,14 +1,27 @@
 "use client";
+
+import { useEffect, useState } from "react";
 import Sidebar from "../components/dashboardUI/Sidebar";
 import MainNotifications from "../components/notificationsui/MainNotifications";
 
-const pages = () => {
+const NotificationPages = () => {
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const storedData = localStorage.getItem("data");
+      const parsedData = JSON.parse(storedData);
+
+      setEmail(parsedData.email);
+    })();
+  }, []);
+
   return (
     <div className="h-[100svh] flex w-full relative">
-        <Sidebar />
-        <MainNotifications />
+      <Sidebar />
+      <MainNotifications email={email} />
     </div>
-  )
-}
+  );
+};
 
-export default pages
+export default NotificationPages;

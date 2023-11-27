@@ -11,7 +11,7 @@ export async function GET(_req) {
   try {
     const foundInvoices = await invoice.find(
       {},
-      "userId invoiceId amount businessEmail dueDate isPaid overdue updatedAt"
+      "userId invoiceId amount quantity businessEmail dueDate isPaid overdue updatedAt"
     );
 
     return NextResponse.json({
@@ -30,6 +30,7 @@ export async function POST(req) {
     const {
       userId,
       amount,
+      quantity,
       businessEmail,
       dueDate,
       clientEmail,
@@ -64,6 +65,7 @@ export async function POST(req) {
       customer: foundClient[0].clientId,
       amount: amount,
       currency: "usd",
+      quantity: quantity,
     });
 
     const newInvoice = await invoice({

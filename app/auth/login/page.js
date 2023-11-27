@@ -64,6 +64,7 @@ const Login = () => {
         businessName: data.data.businessName,
         businessField: data.data.businessField,
         email: data.data.email,
+        date: data.data.createdAt,
       };
       localStorage.setItem("data", JSON.stringify(userData));
 

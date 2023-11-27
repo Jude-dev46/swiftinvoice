@@ -8,6 +8,7 @@ const ModalUI = ({ show, handleClose }) => {
   const dispatch = useDispatch();
   const titleInputRef = useRef();
   const amountInputRef = useRef();
+  const quantityInputRef = useRef();
   const emailInputRef = useRef();
   const dateInputRef = useRef();
 
@@ -31,6 +32,7 @@ const ModalUI = ({ show, handleClose }) => {
     const enteredData = {
       userId: parsedData.userId,
       amount: amountInputRef.current.value,
+      quantity: quantityInputRef.current.value,
       clientEmail: emailInputRef.current.value,
       dueDate: dateInputRef.current.value,
     };
@@ -86,7 +88,7 @@ const ModalUI = ({ show, handleClose }) => {
             controlId="exampleForm.ControlInput1"
           >
             <Form.Label className="text-black font-semibold">
-              Invoice title
+              Product
             </Form.Label>
             <Form.Control
               type="text"
@@ -103,6 +105,19 @@ const ModalUI = ({ show, handleClose }) => {
               type="number"
               className="outline-0 px-2 py-1 bg-transparent border-2 border-slate-300 rounded-md"
               ref={amountInputRef}
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3 flex flex-col"
+            controlId="exampleForm.ControlTextarea1"
+          >
+            <Form.Label className="text-black font-semibold">
+              Quality
+            </Form.Label>
+            <Form.Control
+              type="number"
+              className="outline-0 px-2 py-1 bg-transparent border-2 border-slate-300 rounded-md"
+              ref={quantityInputRef}
             />
           </Form.Group>
           <Form.Group

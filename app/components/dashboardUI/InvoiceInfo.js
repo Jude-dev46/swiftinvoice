@@ -45,15 +45,17 @@ const InvoiceInfo = () => {
 
   return (
     <div className="flex flex-col md:flex-row gap-8 mb-8">
-      <div className="w-[95%] md:w-[30%] lg:h-[210px] bg-white text-black rounded-lg p-8 shadow-md">
+      <div
+        className={`bg-[url('/Vector.svg')] bg-cover w-[95%] md:w-[30%] lg:h-[210px] bg-white text-black rounded-xl p-8 shadow-md`}
+      >
         <h2 className="text-2xl font-bold">Income</h2>
         <p className="text-3xl font-semibold">${calcSum(paidInvoices)}</p>
       </div>
-      <div className="w-[95%] md:w-[30%] lg:h-[210px] bg-white text-black rounded-lg p-8 shadow-md">
+      <div className="bg-[url('/Vector1.svg')] bg-cover w-[95%] md:w-[30%] lg:h-[210px] bg-white text-black rounded-xl p-8 shadow-md">
         <h2 className="text-2xl font-bold">Unpaid</h2>
         <p className="text-3xl font-semibold">${calcSum(unpaidInvoices)}</p>
       </div>
-      <div className="w-[95%] md:w-[30%] lg:h-[210px] bg-white text-black rounded-lg p-8 shadow-md">
+      <div className="bg-[url('/Vector1.svg')] bg-cover w-[95%] md:w-[30%] lg:h-[210px] bg-white text-black rounded-xl p-8 shadow-md">
         <h2 className="text-2xl font-bold">Overdue</h2>
         <p className="text-3xl font-semibold">{findOverdueInvoices()}</p>
       </div>

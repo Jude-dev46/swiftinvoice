@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import Sidebar from "../components/dashboardUI/Sidebar";
-import MainClient from "../components/clientUI/MainClient";
+import MainClient from "../components/clientui/MainClient";
 import ClientModal from "../components/clientUI/ClientModal";
 
 const Clients = () => {

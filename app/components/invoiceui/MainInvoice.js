@@ -12,7 +12,7 @@ const MainInvoice = ({ handleShow, invoices, email, isInvoice }) => {
   const [selectedValue, setSelectedValue] = useState();
   const isOpen = useSelector((state) => state.ui.isOpen);
 
-  if (isOpen) {
+  if (isOpen && typeof window !== "undefined") {
     document.body.classList.add("overflow-hidden");
   } else {
     document.body.classList.remove("overflow-hidden");

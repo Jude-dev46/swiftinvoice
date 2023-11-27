@@ -22,7 +22,7 @@ const Sidebar = () => {
   const pathname = usePathname();
   const isOpen = useSelector((state) => state.ui.isOpen);
 
-  if (isOpen) {
+  if (isOpen && typeof window !== "undefined") {
     document.body.classList.add("overflow-hidden");
   } else {
     document.body.classList.remove("overflow-hidden");

@@ -16,7 +16,7 @@ const ClientModal = ({ show, handleClose }) => {
   const isError = useSelector((state) => state.ui.isError);
   const isLoading = useSelector((state) => state.ui.isLoading);
 
-  if (show) {
+  if (show && typeof window !== "undefined") {
     document.body.classList.add("overflow-hidden");
   } else {
     document.body.classList.remove("overflow-hidden");

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MainHeader from "../dashboardUI/MainHeader";
 import RecentInvoices from "../dashboardUI/RecentInvoices";
 
-const MainInvoice = ({ handleShow, invoices }) => {
+const MainInvoice = ({ handleShow, invoices, email }) => {
   const dispatch = useDispatch();
   const [selectedValue, setSelectedValue] = useState();
   const isOpen = useSelector((state) => state.ui.isOpen);
@@ -24,7 +24,7 @@ const MainInvoice = ({ handleShow, invoices }) => {
     <div
       className={`bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 w-full lg:w-10/12 flex flex-col px-4 md:px-12 lg:px-24 py-8`}
     >
-      <MainHeader welcomeText={"Invoices"} />
+      <MainHeader welcomeText={"Invoices"} email={email} />
       <select
         className="bg-violet-200 w-fit text-black mb-4 rounded-md"
         value={selectedValue}

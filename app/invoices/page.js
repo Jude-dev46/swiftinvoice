@@ -8,6 +8,7 @@ import ModalUI from "../components/invoiceui/Modal";
 const Invoices = () => {
   const [show, setShow] = useState(false);
   const [invoices, setInvoices] = useState([]);
+  const [email, setEmail] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -31,6 +32,7 @@ const Invoices = () => {
       );
 
       setInvoices(filteredInvoice);
+      setEmail(parsedData.email);
     })();
   }, []);
 
@@ -38,7 +40,7 @@ const Invoices = () => {
     <div className="h-full lg:h-[100svh] flex w-full relative">
       {show && <ModalUI show={show} handleClose={handleClose} />}
       <Sidebar />
-      <MainInvoice handleShow={handleShow} invoices={invoices} />
+      <MainInvoice handleShow={handleShow} invoices={invoices} email={email} />
     </div>
   );
 };

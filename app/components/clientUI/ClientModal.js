@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { uiActions } from "../store/uislice";

@@ -169,7 +169,7 @@ const Signup = () => {
                 className={
                   state
                     ? "w-full opacity-40 text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2 hover:cursor-pointer"
-                    : "w-full text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2"
+                    : "w-full text-center text-black bg-yellow-500 px-10 lg:px-24 py-1.5 text-lg lg:text-xl lg:py-2 rounded-md mt-6 mb-2 hover:cursor-pointer"
                 }
               >
                 Next

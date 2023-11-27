@@ -84,20 +84,38 @@ const MainAccount = () => {
         <p className="text-[1.2rem]">Admin</p>
       </div>
 
-      <div className="mt-8 bg-white justify-start rounded-lg w-48 lg:w-[90%] mx-auto h-auto text-black gap-4 p-4 grid grid-cols-3 grid-rows-1">
+      <div className="mt-8 bg-white justify-start rounded-lg lg:w-[90%] mx-auto h-auto text-black gap-4 p-4 grid grid-cols-2 grid-rows-1">
         <div className="self-center justify-self-start">
-            <ul className="text-[1.2rem] space-y-3 ">
-                <li className="">Name</li>
-                <li className="">Business Name</li>
-                <li className="">Business Field</li>
-                <li className="">Email</li>
-                <li className="">Date Of Birth</li>
-                <li className="">Phone Number</li>
+            <ul className="text-[1.2rem] space-y-5 ">
+                <div>
+                  <li className="font-semibold">Name</li>
+                  <li className="">John James</li>
+                </div>
+                <div>
+                  <li className="font-semibold">Business Name</li>
+                  <li className="">Betty's Cake</li>
+                </div>
+                <div>
+                  <li className="font-semibold">Business Field</li>
+                  <li className="">Catering</li>
+                </div>
+                <div>
+                  <li className="font-semibold">Email</li>
+                  <li className="">johnjames@gmail.com</li>
+                </div>
+               <div>
+                 <li className="font-semibold">Date Of Birth</li>
+                 <li className="">14th July</li>
+               </div>
+              <div>
+                <li className="font-semibold">Phone Number</li>
+                <li className="">09012345678</li>
+              </div>
 
 
             </ul>
         </div>
-        <div className="self-center justify-self-start">
+        {/* <div className="self-center justify-self-start">
 
         <ul className="text-[1.2rem] space-y-3">
                 <li className="">John James</li>
@@ -107,7 +125,7 @@ const MainAccount = () => {
                 <li className="">14th July</li>
                 <li className="">09012345678</li>
             </ul>
-        </div>
+        </div> */}
 
         {/* <div className="self-start justify-self-center w-8  ">
         </div> */}

@@ -19,13 +19,15 @@ const MainAccount = () => {
 
   useEffect(() => {
     (async () => {
-      const storedData = localStorage.getItem("data");
-      const parsedData = JSON.parse(storedData);
+      if (typeof window !== "undefined") {
+        const storedData = localStorage.getItem("data");
+        const parsedData = JSON.parse(storedData);
 
-      setEmail(parsedData.email);
-      setBusinessName(parsedData.businessName);
-      setBusinessField(parsedData.businessField);
-      setDate(parsedData.date);
+        setEmail(parsedData.email);
+        setBusinessName(parsedData.businessName);
+        setBusinessField(parsedData.businessField);
+        setDate(parsedData.date);
+      }
     })();
   }, []);
 

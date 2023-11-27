@@ -9,10 +9,12 @@ const NotificationPages = () => {
 
   useEffect(() => {
     (async () => {
-      const storedData = localStorage.getItem("data");
-      const parsedData = JSON.parse(storedData);
+      if (typeof window !== "undefined") {
+        const storedData = localStorage.getItem("data");
+        const parsedData = JSON.parse(storedData);
 
-      setEmail(parsedData.email);
+        setEmail(parsedData.email);
+      }
     })();
   }, []);
 

@@ -12,20 +12,22 @@ const InvoicePage = ({ params }) => {
 
   useEffect(() => {
     (async () => {
-      const storedData = localStorage.getItem("data");
-      const parsedData = JSON.parse(storedData);
+      if (typeof window !== "undefined") {
+        const storedData = localStorage.getItem("data");
+        const parsedData = JSON.parse(storedData);
 
-      setEmail(parsedData.email);
+        setEmail(parsedData.email);
 
-      const res = await fetch("/api/invoices");
-      const data = await res.json();
-      console.log(data);
+        const res = await fetch("/api/invoices");
+        const data = await res.json();
+        console.log(data);
 
-      const singleInvoice = data.data.filter(
-        (inv) => inv.businessEmail === parsedData.email
-      );
+        const singleInvoice = data.data.filter(
+          (inv) => inv.businessEmail === parsedData.email
+        );
 
-      setInvoice(singleInvoice);
+        setInvoice(singleInvoice);
+      }
     })();
   }, []);
 

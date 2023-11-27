@@ -1,5 +1,3 @@
-"use client";
-
 import Sidebar from "../components/dashboardUI/Sidebar";
 import MainAccount from "../components/accountui/MainAccount";
 

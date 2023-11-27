@@ -10,11 +10,13 @@ const Main = ({ invoices }) => {
   const [email, setEmail] = useState("");
 
   useEffect(() => {
-    const userData = localStorage.getItem("data");
-    const parsedData = JSON.parse(userData);
+    if (typeof window !== "undefined") {
+      const userData = localStorage.getItem("data");
+      const parsedData = JSON.parse(userData);
 
-    setUsername(parsedData.businessName);
-    setEmail(parsedData.email);
+      setUsername(parsedData.businessName);
+      setEmail(parsedData.email);
+    }
   }, []);
 
   return (

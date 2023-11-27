@@ -16,13 +16,15 @@ const Clients = () => {
     const parsedData = JSON.parse(storedData);
 
     (async () => {
-      const res = await fetch("/api/clients", {
-        method: "GET",
-      });
-      const data = await res.json();
+      if (typeof window !== "undefined") {
+        const res = await fetch("/api/clients", {
+          method: "GET",
+        });
+        const data = await res.json();
 
-      setClients(data.data);
-      setEmail(parsedData.email);
+        setClients(data.data);
+        setEmail(parsedData.email);
+      }
     })();
   }, []);
 

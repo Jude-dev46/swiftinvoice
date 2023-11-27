@@ -5,10 +5,10 @@ import MainSettings from "../components/settingsui/MainSettings";
 const page = () => {
   return (
     <div className="h-full lg:h-[100svh] flex w-full relative">
-        <Sidebar />
-        <MainSettings />
+      <Sidebar />
+      <MainSettings />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

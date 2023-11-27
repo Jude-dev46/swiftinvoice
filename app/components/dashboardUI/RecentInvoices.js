@@ -1,7 +1,8 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { format, isToday, isYesterday, parseISO } from "date-fns";
 
 const RecentInvoices = ({
@@ -50,6 +51,8 @@ const RecentInvoices = ({
     router.push("/invoices");
   }
 
+  console.log(inv);
+
   return (
     <div className="bg-white w-[100%] md:w-[100%] lg:w-[96%] h-[80vh] lg:h-[400px] shadow-md rounded-md relative">
       <div className="bg-violet-200 rounded-tl-md rounded-tr-md p-4 flex justify-between">
@@ -82,32 +85,37 @@ const RecentInvoices = ({
           <p className="w-fit md:w-fit text-right">DueDate</p>
           <p className="w-fit md:w-[20%] text-right">Status</p>
         </div>
-        {info && (
+        {inv.length === 0 && (
           <p className="flex justify-center text-center text-black font-bold">
             No invoice available
           </p>
         )}
         {inv.map((invoice) => (
-          <Link href={`/invoices/${invoice.invoiceId}`} key={invoice.invoiceId}>
-            <div className="w-full flex justify-between items-center text-black font-bold px-2 md:px-8 py-4 hover:bg-neutral-200">
-              <p className="w-fit md:w-fit text-right">
-                {invoice.invoiceId.slice(0, 5)}
-              </p>
-              <p className="w-fit md:w-fit text-right">
-                ${invoice.amount / 100}
-              </p>
-              <p className="w-fit md:w-fit text-right">
-                {formatThreadDate(invoice.dueDate)}
-              </p>
-              <p
-                className={`w-fit md:w-[20%] text-right ${
-                  invoice.status ? "text-green-500" : "text-red-600"
-                }`}
-              >
-                {invoice.status ? "Paid" : "Unpaid"}
-              </p>
-            </div>
-          </Link>
+          <>
+            <Link
+              href={`/invoices/${invoice.invoiceId}`}
+              key={invoice.invoiceId}
+            >
+              <div className="w-full flex justify-between items-center text-black font-bold px-2 md:px-8 py-4 hover:bg-neutral-200">
+                <p className="w-fit md:w-fit text-right">
+                  {invoice.invoiceId.slice(0, 5)}
+                </p>
+                <p className="w-fit md:w-fit text-right">
+                  ${invoice.amount / 100}
+                </p>
+                <p className="w-fit md:w-fit text-right">
+                  {formatThreadDate(invoice.dueDate)}
+                </p>
+                <p
+                  className={`w-fit md:w-[20%] text-right ${
+                    invoice.isPaid ? "text-green-500" : "text-red-600"
+                  }`}
+                >
+                  {invoice.isPaid ? "Paid" : "Unpaid"}
+                </p>
+              </div>
+            </Link>
+          </>
         ))}
       </div>
     </div>

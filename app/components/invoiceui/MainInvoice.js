@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MainHeader from "../dashboardUI/MainHeader";
 import RecentInvoices from "../dashboardUI/RecentInvoices";
 
-const MainInvoice = ({ handleShow, invoices, email }) => {
+const MainInvoice = ({ handleShow, invoices, email, isInvoice }) => {
   const dispatch = useDispatch();
   const [selectedValue, setSelectedValue] = useState();
   const isOpen = useSelector((state) => state.ui.isOpen);
@@ -38,7 +38,7 @@ const MainInvoice = ({ handleShow, invoices, email }) => {
       <div onClick={() => dispatch(uiActions.setIsOpen(false))}>
         <RecentInvoices
           title={"Invoices"}
-          isInvoice={true}
+          isInvoice={isInvoice}
           invoices={invoices}
           handleShow={handleShow}
           selectedValue={selectedValue}

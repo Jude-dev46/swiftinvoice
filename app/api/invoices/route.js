@@ -11,7 +11,7 @@ export async function GET(_req) {
   try {
     const foundInvoices = await invoice.find(
       {},
-      "userId invoiceId amount quantity businessEmail dueDate isPaid overdue updatedAt"
+      "userId invoiceId product amount quantity businessEmail dueDate isPaid overdue updatedAt"
     );
 
     return NextResponse.json({
@@ -29,6 +29,7 @@ export async function POST(req) {
     const body = await req.json();
     const {
       userId,
+      product,
       amount,
       quantity,
       businessEmail,
@@ -61,19 +62,20 @@ export async function POST(req) {
       });
     }
 
-    const product = await stripe.invoiceItems.create({
+    const createdInv = await stripe.invoiceItems.create({
       customer: foundClient[0].clientId,
       amount: amount,
       currency: "usd",
-      quantity: quantity,
     });
 
     const newInvoice = await invoice({
       userId: userId,
-      invoiceId: product.id,
+      invoiceId: createdInv.id,
       businessEmail: businessEmail,
       clientEmail: clientEmail,
+      product: product,
       amount: amount,
+      quantity: quantity,
       dueDate: dueDate,
       isPaid: isPaid,
       overdue: overdue,

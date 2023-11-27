@@ -40,7 +40,12 @@ const Invoices = () => {
     <div className="h-full lg:h-[100svh] flex w-full relative">
       {show && <ModalUI show={show} handleClose={handleClose} />}
       <Sidebar />
-      <MainInvoice handleShow={handleShow} invoices={invoices} email={email} />
+      <MainInvoice
+        handleShow={handleShow}
+        invoices={invoices}
+        email={email}
+        isInvoice={true}
+      />
     </div>
   );
 };

@@ -11,10 +11,12 @@ const invoiceSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    product: { type: String },
     amount: {
       type: Number,
       required: true,
     },
+    quantity: { type: Number },
     businessEmail: { type: String, required: true },
     dueDate: {
       type: Date,

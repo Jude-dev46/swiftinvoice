@@ -31,6 +31,7 @@ const ModalUI = ({ show, handleClose }) => {
 
     const enteredData = {
       userId: parsedData.userId,
+      product: titleInputRef.current.value,
       amount: amountInputRef.current.value,
       quantity: quantityInputRef.current.value,
       clientEmail: emailInputRef.current.value,
@@ -74,7 +75,7 @@ const ModalUI = ({ show, handleClose }) => {
 
   return (
     <div className="bg-[rgb(0,0,0,0.7)] fixed w-full h-screen top-0 left-0 flex flex-col justify-center items-center z-20 overflow-hidden">
-      <div className="bg-white relative flex flex-col border rounded-lg p-3 z-10">
+      <div className="bg-white relative flex flex-col border rounded-lg px-8 py-4 z-10">
         <div
           onClick={handleClose}
           className="w-12 mb-4 text-center text-blue-900 cursor-pointer hover:text-blue-950 hover:font-bold"
@@ -112,7 +113,7 @@ const ModalUI = ({ show, handleClose }) => {
             controlId="exampleForm.ControlTextarea1"
           >
             <Form.Label className="text-black font-semibold">
-              Quality
+              Quantity
             </Form.Label>
             <Form.Control
               type="number"

@@ -30,13 +30,18 @@ const InvoiceInfo = () => {
   let sum = 0;
   const paidInvoices = invoices.filter((inv) => inv.isPaid);
   const unpaidInvoices = invoices.filter((inv) => !inv.isPaid);
+  console.log(unpaidInvoices);
 
   function calcSum(array) {
     for (let i = 0; i < array.length; i++) {
       sum += array[i].amount;
     }
 
-    return sum / 100;
+    if (array.length === 0) {
+      return 0;
+    } else {
+      return sum / 100;
+    }
   }
   function findOverdueInvoices() {
     const overdueInvoices = invoices.filter((inv) => inv.overdue);

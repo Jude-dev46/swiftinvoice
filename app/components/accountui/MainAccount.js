@@ -43,7 +43,7 @@ const MainAccount = () => {
 
 
   return (
-    <div className="bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 w-full lg:w-10/12 flex flex-col px-6 md:px-12 lg:px-24 py-8">
+    <div className="bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 w-full lg:w-10/12 flex flex-col px-6 md:px-12 py-8">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-1xl md:text-4xl text-black font-bold">Accounts</h1>
         <div className="">
@@ -84,10 +84,10 @@ const MainAccount = () => {
         <p className="text-[1.2rem]">Admin</p>
       </div>
 
-      <div className="mt-8 bg-white justify-start rounded-lg lg:w-[90%] mx-auto h-auto text-black gap-4 p-4 grid grid-cols-2 grid-rows-1">
+      <div className="mt-8 bg-white justify-start rounded-lg lg:w-[50%] mx-auto text-black gap-4 p-10 grid grid-cols-2 grid-rows-1">
         <div className="self-center justify-self-start">
             <ul className="text-[1.2rem] space-y-5 ">
-                <div>
+                <div classsName='lg:flex flex-row'>
                   <li className="font-semibold">Name</li>
                   <li className="">John James</li>
                 </div>
@@ -111,24 +111,8 @@ const MainAccount = () => {
                 <li className="font-semibold">Phone Number</li>
                 <li className="">09012345678</li>
               </div>
-
-
             </ul>
         </div>
-        {/* <div className="self-center justify-self-start">
-
-        <ul className="text-[1.2rem] space-y-3">
-                <li className="">John James</li>
-                <li className="">Betty's Cake</li>
-                <li className="">Catering</li>
-                <li className="">johnjames@gmail.com</li>
-                <li className="">14th July</li>
-                <li className="">09012345678</li>
-            </ul>
-        </div> */}
-
-        {/* <div className="self-start justify-self-center w-8  ">
-        </div> */}
       </div>
     </div>
   );

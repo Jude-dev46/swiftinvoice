@@ -1,9 +1,11 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../components/store/uislice";
-import Link from "next/link";
+import Modal from "../components/ui/Modal";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
@@ -11,9 +13,11 @@ import { useRouter } from "next/navigation";
 const Signup = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState(0);
+  const [message, setMessage] = useState("");
   const router = useRouter();
 
   const isLoading = useSelector((state) => state.ui.isLoading);
+  const isError = useSelector((state) => state.ui.isError);
 
   const schema = yup.object().shape({
     businessName: yup.string().required("Business Name is required"),
@@ -52,6 +56,7 @@ const Signup = () => {
     dispatch(uiActions.setIsLoading(true));
     try {
       const res = await axios.post("/api/auth", data);
+      setMessage(res.data.message);
 
       if (res.data.status === true) {
         dispatch(uiActions.setIsLoading(false));
@@ -59,12 +64,13 @@ const Signup = () => {
       }
     } catch (error) {
       dispatch(uiActions.setIsLoading(false));
-      console.error(error);
+      dispatch(uiActions.setIsError(true));
     }
   };
 
   return (
     <div className="h-[100vh] bg-gradient-to-br from-orange-100 via-red-100 to-violet-100 pt-28 w-full flex flex-col justify-center items-center">
+      {isLoading && <Modal />}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col h-full px-12 py-4 w-full lg:w-1/3"
@@ -218,6 +224,8 @@ const Signup = () => {
           </div>
         )}
       </form>
+      {message && <p className="text-red-600">{message}</p>}
+      {isError && <p className="text-red-600">An error occurred. Try again!</p>}
     </div>
   );
 };

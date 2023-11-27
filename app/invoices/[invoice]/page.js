@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/dashboardUI/Sidebar";
+import Modal from "../../components/invoiceui/Modal";
 import SingleInvoice from "../../components/invoiceui/SingleInvoice";
 
-const InvoicePage = () => {
+const InvoicePage = ({ params }) => {
+  const { invoiceId } = params;
   const [email, setEmail] = useState("");
   const [invoice, setInvoice] = useState([]);
 
@@ -26,6 +28,22 @@ const InvoicePage = () => {
       setInvoice(singleInvoice);
     })();
   }, []);
+
+  async function editHandler() {
+    try {
+      const res = await fetch("/api/invoices", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ invoiceId: invoiceId }),
+      });
+    } catch (error) {
+      return;
+    }
+  }
+
+  function deleteHandler() {}
 
   return (
     <div className="h-[100svh] lg:h-[100svh] flex w-full relative">

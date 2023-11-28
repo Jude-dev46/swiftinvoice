@@ -62,7 +62,7 @@ const ClientModal = ({ show, handleClose }) => {
       });
 
       const data = await res.json();
-      console.log(data);
+
       if (!data.status) {
         setContent(data.message);
         dispatch(uiActions.setIsError(true));

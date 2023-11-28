@@ -32,7 +32,6 @@ const InvoiceInfo = () => {
   let sum = 0;
   const paidInvoices = invoices.filter((inv) => inv.isPaid);
   const unpaidInvoices = invoices.filter((inv) => !inv.isPaid);
-  console.log(unpaidInvoices);
 
   function calcSum(array) {
     for (let i = 0; i < array.length; i++) {

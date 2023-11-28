@@ -65,7 +65,7 @@ const ModalUI = ({ show, handleClose }) => {
       });
 
       const data = await res.json();
-      console.log(data);
+
       if (!data.status) {
         dispatch(uiActions.setIsError(true));
         dispatch(uiActions.setIsLoading(false));

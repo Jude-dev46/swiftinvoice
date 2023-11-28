@@ -20,7 +20,6 @@ const InvoicePage = ({ params }) => {
 
         const res = await fetch("/api/invoices");
         const data = await res.json();
-        console.log(data);
 
         const singleInvoice = data.data.filter(
           (inv) => inv.businessEmail === parsedData.email

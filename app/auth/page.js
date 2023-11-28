@@ -19,7 +19,6 @@ const Signup = () => {
   const isLoading = useSelector((state) => state.ui.isLoading);
   const isError = useSelector((state) => state.ui.isError);
   const isAuth = useSelector((state) => state.ui.isAuthenticated);
-  console.log(isAuth);
 
   const schema = yup.object().shape({
     businessName: yup.string().required("Business Name is required"),

@@ -3,8 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-import SendModal from "./SendModal.js";
-
 const SingleInvoiceInfo = ({ invoice, invoiceId, openModal }) => {
   const router = useRouter();
   const inputRef = useRef();

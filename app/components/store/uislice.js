@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialUiState = {
   notification: null,
-  isAuthenticated: true,
+  isAuthenticated: false,
   isLoading: false,
   isOpen: false,
   isModalOpen: false,

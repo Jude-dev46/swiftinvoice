@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import Menu from "../../../public/menu.svg";
 import { useRouter } from "next/navigation";
 import { format, parseISO } from "date-fns";
 
@@ -16,6 +18,17 @@ const MainAccount = () => {
   const [businessName, setBusinessName] = useState("");
   const [businessField, setBusinessField] = useState("");
   const [date, setDate] = useState("");
+
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.ui.isOpen);
+
+  function toggleSidebar() {
+    if (isOpen) {
+      dispatch(uiActions.setIsOpen(false));
+    } else {
+      dispatch(uiActions.setIsOpen(true));
+    }
+  }
 
   useEffect(() => {
     (async () => {
@@ -56,6 +69,13 @@ const MainAccount = () => {
           >
             <Image src={logout_icon} alt="" width={20} /> Logout
           </button>
+          <Image
+            src={Menu}
+            width={32}
+            alt=""
+            onClick={toggleSidebar}
+            className="lg:hidden block"
+          />
         </div>
       </div>
 

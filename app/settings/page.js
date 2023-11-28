@@ -6,7 +6,7 @@ import MainSettings from "../components/settingsui/MainSettings";
 
 const SettingsPage = () => {
   return (
-    <div className="h-full lg:h-[100svh] flex w-full relative">
+    <div className="h-[100svh] flex w-full relative">
       <Sidebar />
       <MainSettings />
     </div>

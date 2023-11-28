@@ -65,6 +65,7 @@ const Signup = () => {
         router.push("/auth/login");
       }
     } catch (error) {
+      setMessage(error.message);
       dispatch(uiActions.setIsLoading(false));
       dispatch(uiActions.setIsError(true));
     }

@@ -85,7 +85,7 @@ const MainSettings = () => {
         <div className="bg-white p-4 rounded-lg">
           <p className="text-[1.2rem] font-semibold">Account</p>
           <hr className=" border-black my-4 border-2" />
-          <div className="flex items-start gap-28">
+          <div className="flex items-start justify-between">
             <ul>
               <li>Remember Login Credentials</li>
             </ul>
@@ -93,6 +93,30 @@ const MainSettings = () => {
            <Toggle />
             
           </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg space-y-4">
+          <p className="text-[1.2rem] font-semibold">Notifications</p>
+          <hr className=" border-black my-4 border-2 " />
+          <div className="flex items-start justify-between">
+            <ul>
+              <li>Remember Login Credentials</li>
+            </ul>
+        
+          <p>All Invoices</p>
+            
+          </div>
+
+          <div className="flex items-start justify-between">
+            <ul>
+              <li>Remember Login Credentials</li>
+            </ul>
+        
+           <p>All Invoices</p>
+            
+          </div>
+<div className="inline text-end py-4">
+          <Toggle /></div>
         </div>
       </div>
     </div>

@@ -2,13 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/dashboardUI/Sidebar";
-import Modal from "../../components/invoiceui/Modal";
+import EditModal from "../../components/invoiceui/EditModal";
 import SingleInvoice from "../../components/invoiceui/SingleInvoice";
 
 const InvoicePage = ({ params }) => {
-  const { invoiceId } = params;
+  const { invoice } = params;
+
   const [email, setEmail] = useState("");
-  const [invoice, setInvoice] = useState([]);
+  const [show, setShow] = useState(false);
+  const [invoices, setInvoices] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -25,31 +27,31 @@ const InvoicePage = ({ params }) => {
           (inv) => inv.businessEmail === parsedData.email
         );
 
-        setInvoice(singleInvoice);
+        setInvoices(singleInvoice);
       }
     })();
   }, []);
 
-  async function editHandler() {
-    try {
-      const res = await fetch("/api/invoices", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ invoiceId: invoiceId }),
-      });
-    } catch (error) {
-      return;
-    }
-  }
-
-  function deleteHandler() {}
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div className="h-[100svh] lg:h-[100svh] flex w-full relative">
+      {show && (
+        <EditModal
+          show={show}
+          handleClose={handleClose}
+          invoiceId={invoiceId}
+        />
+      )}
       <Sidebar />
-      <SingleInvoice email={email} invoice={invoice} />
+      <SingleInvoice
+        email={email}
+        invoice={invoices}
+        invoiceId={invoice}
+        openModal={handleShow}
+        closeModal={handleClose}
+      />
     </div>
   );
 };

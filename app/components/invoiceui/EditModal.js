@@ -6,7 +6,7 @@ import { uiActions } from "../store/uislice";
 import { AiOutlineLoading } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 
-const ModalUI = ({ show, handleClose }) => {
+const EditModal = ({ show, handleClose, invoiceId }) => {
   const dispatch = useDispatch();
   const titleInputRef = useRef();
   const amountInputRef = useRef();
@@ -54,12 +54,10 @@ const ModalUI = ({ show, handleClose }) => {
     try {
       const params = {
         ...enteredData,
-        isPaid: false,
-        overdue: false,
-        businessEmail: parsedData.email,
+        invoiceId: invoiceId,
       };
       const res = await fetch("/api/invoices", {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
@@ -173,4 +171,4 @@ const ModalUI = ({ show, handleClose }) => {
   );
 };
 
-export default ModalUI;
+export default EditModal;

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
+import isAuth from "../components/utils/isAuth";
 import Sidebar from "../components/dashboardUI/Sidebar";
 import MainInvoice from "../components/invoiceui/MainInvoice";
 import ModalUI from "../components/invoiceui/Modal";
@@ -52,4 +54,4 @@ const Invoices = () => {
   );
 };
 
-export default Invoices;
+export default isAuth(Invoices);

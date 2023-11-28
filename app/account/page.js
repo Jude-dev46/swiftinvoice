@@ -1,7 +1,10 @@
+"use client";
+
+import isAuth from "../components/utils/isAuth";
 import Sidebar from "../components/dashboardUI/Sidebar";
 import MainAccount from "../components/accountui/MainAccount";
 
-const page = () => {
+const Account = () => {
   return (
     <div className="min-h-[100svh] flex w-full relative">
       <Sidebar />
@@ -10,4 +13,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default isAuth(Account);

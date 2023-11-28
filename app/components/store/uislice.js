@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialUiState = {
   notification: null,
+  isAuthenticated: false,
   isLoading: false,
   isOpen: false,
   isModalOpen: false,
@@ -18,6 +19,9 @@ const uiSlice = createSlice({
         title: action.payload.title,
         message: action.payload.message,
       };
+    },
+    setIsAuth(state, action) {
+      state.isAuthenticated = action.payload;
     },
     setIsOpen(state, action) {
       state.isOpen = action.payload;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import isAuth from "../components/utils/isAuth";
 
 import Sidebar from "../components/dashboardUI/Sidebar";
 import Main from "../components/dashboardUI/Main";
@@ -40,4 +41,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default isAuth(Dashboard);

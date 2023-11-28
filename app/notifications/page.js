@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
+import isAuth from "../components/utils/isAuth";
 import Sidebar from "../components/dashboardUI/Sidebar";
 import MainNotifications from "../components/notificationsui/MainNotifications";
 
@@ -26,4 +28,4 @@ const NotificationPages = () => {
   );
 };
 
-export default NotificationPages;
+export default isAuth(NotificationPages);

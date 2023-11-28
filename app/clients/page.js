@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import isAuth from "../components/utils/isAuth";
 import Sidebar from "../components/dashboardUI/Sidebar";
 import MainClient from "../components/clientui/MainClient";
 import ClientModal from "../components/clientUI/ClientModal";
@@ -44,4 +45,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+export default isAuth(Clients);

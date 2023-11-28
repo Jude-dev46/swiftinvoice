@@ -223,9 +223,11 @@ const Signup = () => {
             </div>
           </div>
         )}
+        {message && <p className="text-red-600">{message}</p>}
+        {isError && (
+          <p className="text-red-600">An error occurred. Try again!</p>
+        )}
       </form>
-      {message && <p className="text-red-600">{message}</p>}
-      {isError && <p className="text-red-600">An error occurred. Try again!</p>}
     </div>
   );
 };

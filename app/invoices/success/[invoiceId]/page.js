@@ -8,17 +8,19 @@ const SuccessPage = ({ params }) => {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/invoices", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          invoiceId: invoiceId,
-          isPaid: true,
-        }),
-      });
-      await res.json();
+      if (typeof window !== "undefined") {
+        const res = await fetch("/api/invoices", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            invoiceId: invoiceId,
+            isPaid: true,
+          }),
+        });
+        await res.json();
+      }
     })();
   }, [invoiceId]);
 

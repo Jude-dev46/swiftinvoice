@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import isAuth from "../components/utils/isAuth";
 
 import Sidebar from "../components/dashboardUI/Sidebar";
 import Main from "../components/dashboardUI/Main";
@@ -10,23 +11,25 @@ const Dashboard = () => {
 
   useEffect(() => {
     (async () => {
-      const storedData = localStorage.getItem("data");
-      const parsedData = JSON.parse(storedData);
+      if (typeof window !== "undefined") {
+        const storedData = localStorage.getItem("data");
+        const parsedData = JSON.parse(storedData);
 
-      const res = await fetch("/api/invoices", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+        const res = await fetch("/api/invoices", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      const data = await res.json();
+        const data = await res.json();
 
-      const filteredInvoice = data.data.filter(
-        (inv) => inv.businessEmail === parsedData.email
-      );
+        const filteredInvoice = data.data.filter(
+          (inv) => inv.businessEmail === parsedData.email
+        );
 
-      setInvoices(filteredInvoice);
+        setInvoices(filteredInvoice);
+      }
     })();
   }, []);
 
@@ -38,4 +41,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default isAuth(Dashboard);

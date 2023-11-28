@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { uiActions } from "../store/uislice";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,10 +12,12 @@ const MainInvoice = ({ handleShow, invoices, email, isInvoice }) => {
   const [selectedValue, setSelectedValue] = useState();
   const isOpen = useSelector((state) => state.ui.isOpen);
 
-  if (isOpen) {
-    document.body.classList.add("overflow-hidden");
-  } else {
-    document.body.classList.remove("overflow-hidden");
+  if (typeof window !== "undefined") {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
   }
 
   const handleSelectChange = (event) => {

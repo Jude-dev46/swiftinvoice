@@ -17,22 +17,24 @@ const RecentInvoices = ({
   const [info, setInfo] = useState(false);
 
   useEffect(() => {
-    setInfo(false);
+    if (typeof window !== "undefined") {
+      setInfo(false);
 
-    if (!selectedValue) {
-      setInv(invoices);
-    } else if (selectedValue === "Unpaid") {
-      const unpaidInvoice = invoices.filter((inv) => !inv.isPaid);
+      if (!selectedValue) {
+        setInv(invoices);
+      } else if (selectedValue === "Unpaid") {
+        const unpaidInvoice = invoices.filter((inv) => !inv.isPaid);
 
-      if (unpaidInvoice) {
-        setInv(unpaidInvoice);
-      }
-    } else if (selectedValue === "Paid") {
-      const paidInvoice = invoices.filter((inv) => inv.isPaid);
-      setInv(paidInvoice);
+        if (unpaidInvoice) {
+          setInv(unpaidInvoice);
+        }
+      } else if (selectedValue === "Paid") {
+        const paidInvoice = invoices.filter((inv) => inv.isPaid);
+        setInv(paidInvoice);
 
-      if (invoices.length === 0) {
-        setInfo(true);
+        if (invoices.length === 0) {
+          setInfo(true);
+        }
       }
     }
   }, [selectedValue, invoices]);

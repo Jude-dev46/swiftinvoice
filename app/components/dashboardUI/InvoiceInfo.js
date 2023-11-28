@@ -7,30 +7,31 @@ const InvoiceInfo = () => {
 
   useEffect(() => {
     (async () => {
-      const storedData = localStorage.getItem("data");
-      const parsedData = JSON.parse(storedData);
+      if (typeof window !== "undefined") {
+        const storedData = localStorage.getItem("data");
+        const parsedData = JSON.parse(storedData);
 
-      const res = await fetch("/api/invoices", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+        const res = await fetch("/api/invoices", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      const data = await res.json();
+        const data = await res.json();
 
-      const filteredInvoice = data.data.filter(
-        (inv) => inv.businessEmail === parsedData.email
-      );
+        const filteredInvoice = data.data.filter(
+          (inv) => inv.businessEmail === parsedData.email
+        );
 
-      setInvoices(filteredInvoice);
+        setInvoices(filteredInvoice);
+      }
     })();
   }, []);
 
   let sum = 0;
   const paidInvoices = invoices.filter((inv) => inv.isPaid);
   const unpaidInvoices = invoices.filter((inv) => !inv.isPaid);
-  console.log(unpaidInvoices);
 
   function calcSum(array) {
     for (let i = 0; i < array.length; i++) {

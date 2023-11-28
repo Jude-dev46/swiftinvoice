@@ -1,8 +1,10 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
+import isAuth from "../components/utils/isAuth";
 import Sidebar from "../components/dashboardUI/Sidebar";
-import MainClient from "../components/clientUI/MainClient";
+import MainClient from "../components/clientui/MainClient";
 import ClientModal from "../components/clientUI/ClientModal";
 
 const Clients = () => {
@@ -15,13 +17,15 @@ const Clients = () => {
     const parsedData = JSON.parse(storedData);
 
     (async () => {
-      const res = await fetch("/api/clients", {
-        method: "GET",
-      });
-      const data = await res.json();
+      if (typeof window !== "undefined") {
+        const res = await fetch("/api/clients", {
+          method: "GET",
+        });
+        const data = await res.json();
 
-      setClients(data.data);
-      setEmail(parsedData.email);
+        setClients(data.data);
+        setEmail(parsedData.email);
+      }
     })();
   }, []);
 
@@ -41,4 +45,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+export default isAuth(Clients);

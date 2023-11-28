@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef } from "react";
 import Form from "react-bootstrap/Form";
 import { uiActions } from "../store/uislice";
@@ -15,7 +17,7 @@ const ModalUI = ({ show, handleClose }) => {
   const isError = useSelector((state) => state.ui.isError);
   const isLoading = useSelector((state) => state.ui.isLoading);
 
-  if (show) {
+  if (show && typeof window !== "undefined") {
     document.body.classList.add("overflow-hidden");
   } else {
     document.body.classList.remove("overflow-hidden");
@@ -63,7 +65,7 @@ const ModalUI = ({ show, handleClose }) => {
       });
 
       const data = await res.json();
-      console.log(data);
+
       if (!data.status) {
         dispatch(uiActions.setIsError(true));
         dispatch(uiActions.setIsLoading(false));

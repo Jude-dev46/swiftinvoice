@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
+import isAuth from "../components/utils/isAuth";
 import Sidebar from "../components/dashboardUI/Sidebar";
 import MainNotifications from "../components/notificationsui/MainNotifications";
 
@@ -9,10 +11,12 @@ const NotificationPages = () => {
 
   useEffect(() => {
     (async () => {
-      const storedData = localStorage.getItem("data");
-      const parsedData = JSON.parse(storedData);
+      if (typeof window !== "undefined") {
+        const storedData = localStorage.getItem("data");
+        const parsedData = JSON.parse(storedData);
 
-      setEmail(parsedData.email);
+        setEmail(parsedData.email);
+      }
     })();
   }, []);
 
@@ -24,4 +28,4 @@ const NotificationPages = () => {
   );
 };
 
-export default NotificationPages;
+export default isAuth(NotificationPages);

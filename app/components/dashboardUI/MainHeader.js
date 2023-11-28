@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,6 +12,14 @@ import Notifications from "../../../public/notifications.svg";
 const MainHeader = ({ welcomeText, email }) => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.ui.isOpen);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    const storedImageData = localStorage.getItem("uploadedImage");
+    const imageData = JSON.parse(storedImageData);
+
+    setSelectedImage(imageData);
+  }, []);
 
   function toggleSidebar() {
     if (isOpen) {
@@ -33,9 +42,21 @@ const MainHeader = ({ welcomeText, email }) => {
           </p>
         </div>
         <Link href="/account">
-          <p className="bg-blue-900 rounded-full px-4 py-2 text-center">
-            {email.charAt(0).toUpperCase()}
-          </p>
+          {selectedImage ? (
+            <div className="w-12 h-12 lg:w-44 lg:h-44 rounded-full">
+              <Image
+                src={selectedImage}
+                alt="Selected"
+                width={100}
+                height={100}
+                className="rounded-full w-full h-full object-cover"
+              />
+            </div>
+          ) : (
+            <p className="bg-blue-900 rounded-full px-4 py-2 text-center">
+              {email.charAt(0).toUpperCase()}
+            </p>
+          )}
         </Link>
         <Image
           src={Menu}

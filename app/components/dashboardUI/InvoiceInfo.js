@@ -50,7 +50,7 @@ const InvoiceInfo = () => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 mb-8">
+    <div className="flex flex-col md:flex-row gap-4 md:gap-8 mb-8">
       <div
         className={`bg-[url('/Vector.svg')] bg-cover w-[95%] md:w-[30%] lg:h-[210px] bg-white text-black rounded-xl p-8 shadow-md`}
       >

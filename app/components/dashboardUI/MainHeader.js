@@ -34,7 +34,7 @@ const MainHeader = ({ welcomeText, email }) => {
         </div>
         <Link href="/account">
           <p className="bg-blue-900 rounded-full px-4 py-2 text-center">
-            {email.charAt(0).toUpperCase()}
+            {email}
           </p>
         </Link>
         <Image

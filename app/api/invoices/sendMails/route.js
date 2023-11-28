@@ -1,7 +1,7 @@
 import NextResponse from "next/server";
 
 const nodemailer = require("nodemailer");
-const Client = require("../../../models/client");
+const Client = require("../../models/client");
 
 const email = process.env.EMAIL;
 const pass = process.env.EMAIL_PASS;

@@ -67,6 +67,7 @@ const Login = () => {
         date: data.data.createdAt,
       };
       localStorage.setItem("data", JSON.stringify(userData));
+      dispatch(uiActions.setIsAuth(true));
 
       router.push("/dashboard");
     } catch (error) {

@@ -22,7 +22,7 @@ const MainHeader = ({ welcomeText, email }) => {
 
   return (
     <div className="flex items-center justify-between mb-8">
-      <h1 className="text-1xl md:text-4xl text-black font-bold">
+      <h1 className="text-2xl md:text-4xl text-black font-bold">
         {welcomeText}
       </h1>
       <div className="flex items-center gap-2 lg:mr-10">

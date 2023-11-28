@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { uiActions } from "../store/uislice";
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../../public/menu.svg";
 import { useRouter } from "next/navigation";
@@ -52,7 +53,6 @@ const MainAccount = () => {
     }
   }
 
-  console.log(date);
   function logoutHandler() {
     localStorage.removeItem("data");
     router.push("/auth");
@@ -61,8 +61,8 @@ const MainAccount = () => {
   return (
     <div className="bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 w-full lg:w-10/12 flex flex-col px-8 md:px-12 lg:px-24 py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-1xl md:text-4xl text-black font-bold">Accounts</h1>
-        <div className="">
+        <h1 className="text-2xl md:text-4xl text-black font-bold">Accounts</h1>
+        <div className="flex gap-4">
           <button
             className="flex items-center justify-between gap-2 text-[#1916B9] border-[#1916B9] rounded-[20px] border-[2.5px] px-4 py-2"
             onClick={logoutHandler}

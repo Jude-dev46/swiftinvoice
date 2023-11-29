@@ -43,7 +43,7 @@ const MainHeader = ({ welcomeText, email }) => {
         </div>
         <Link href="/account">
           {selectedImage ? (
-            <div className="w-12 h-12 lg:w-44 lg:h-44 rounded-full">
+            <div className="w-12 h-12 lg:w-12 lg:h-12 rounded-full">
               <Image
                 src={selectedImage}
                 alt="Selected"

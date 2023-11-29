@@ -28,7 +28,6 @@ export async function GET(req, context) {
       data: foundClient,
     });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ status: false, message: "An error occurred!" });
   }
 }

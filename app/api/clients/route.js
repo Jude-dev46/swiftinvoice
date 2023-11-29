@@ -73,7 +73,6 @@ export async function POST(req) {
       { status: 201 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ status: false, message: "An error occurred!" });
   }
 }

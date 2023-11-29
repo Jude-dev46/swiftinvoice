@@ -53,8 +53,6 @@ const RecentInvoices = ({
     router.push("/invoices");
   }
 
-  console.log(inv);
-
   return (
     <div className="bg-white w-[100%] md:w-[100%] lg:w-[96%] h-[80vh] lg:h-[400px] shadow-md rounded-md relative">
       <div className="bg-violet-200 rounded-tl-md rounded-tr-md p-4 flex justify-between">

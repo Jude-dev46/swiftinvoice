@@ -47,8 +47,8 @@ const MainHeader = ({ welcomeText, email }) => {
               <Image
                 src={selectedImage}
                 alt="Selected"
-                width={100}
-                height={100}
+                width={24}
+                height={24}
                 className="rounded-full w-full h-full object-cover"
               />
             </div>

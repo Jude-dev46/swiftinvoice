@@ -91,6 +91,7 @@ const MainAccount = () => {
   function logoutHandler() {
     dispatch(uiActions.setIsLoading(true));
     localStorage.removeItem("data");
+    localStorage.removeItem("uploadedImage");
     dispatch(uiActions.setIsLoading(false));
     router.push("/");
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import { uiActions } from "../store/uislice";
 import { AiOutlineLoading } from "react-icons/ai";
@@ -16,6 +16,12 @@ const ModalUI = ({ show, handleClose }) => {
 
   const isError = useSelector((state) => state.ui.isError);
   const isLoading = useSelector((state) => state.ui.isLoading);
+
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(uiActions.setIsLoading(false));
+    }
+  }, [isLoading, dispatch]);
 
   if (typeof window !== "undefined") {
     if (show) {

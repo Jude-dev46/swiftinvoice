@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { uiActions } from "../store/uislice";
 import { AiOutlineLoading } from "react-icons/ai";
@@ -15,6 +15,12 @@ const ClientModal = ({ show, handleClose }) => {
 
   const isError = useSelector((state) => state.ui.isError);
   const isLoading = useSelector((state) => state.ui.isLoading);
+
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(uiActions.setIsLoading(false));
+    }
+  }, [isLoading, dispatch]);
 
   if (show && typeof window !== "undefined") {
     document.body.classList.add("overflow-hidden");

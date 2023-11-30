@@ -96,39 +96,6 @@ const MainAccount = () => {
     router.push("/");
   }
 
-  //Uploading the Admin image
-  const [selectedImage, setSelectedImage] = useState(() => {
-    const storedImageData = localStorage.getItem("uploadedImage");
-    return storedImageData ? JSON.parse(storedImageData) : null;
-  });
-
-  const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    if (selectedImage) {
-      localStorage.setItem("uploadedImage", JSON.stringify(selectedImage));
-    }
-  }, [selectedImage]);
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setSelectedImage(reader.result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleButtonClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
   return (
     <div className="bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 w-full lg:w-10/12 flex flex-col px-6 md:px-12 py-8">
       <div className="flex items-center justify-between mb-8">

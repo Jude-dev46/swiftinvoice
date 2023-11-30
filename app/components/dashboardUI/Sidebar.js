@@ -33,7 +33,7 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`bg-neutral-100 lg:block w-2.5/12 p-8 flex  flex-col items-center justify-between`}
+        className={`bg-neutral-100 hidden lg:block w-2.5/12 p-8 flex  flex-col items-center justify-between`}
       >
         <div className="mb-8">
           <Image src={Logo} width={227} height={120} alt="" priority={true} />

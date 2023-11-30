@@ -1,15 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import part1 from "../public/Image2.png";
 import part2 from "../public/Image.png";
-// import text from "../public/text.png";
-// import Logo from "../public/logo-text.svg";
 
-function welcomePage() {
+function WelcomePage() {
   return (
     <div className="">
       <div className="h-[100vh] bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 flex flex-col justify-center items-center pt-10">
@@ -55,4 +53,4 @@ function welcomePage() {
   );
 }
 
-export default welcomePage;
+export default WelcomePage;

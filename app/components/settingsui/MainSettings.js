@@ -16,7 +16,7 @@ const MainSettings = () => {
               <li>Delete Invoices after</li>
             </ul>
 
-            <Dropdown items={["USD", "NGN"]} />
+            <Dropdown items={["Never", "7days"]} />
           </div>
         </div>
 

@@ -29,6 +29,8 @@ const MainHeader = ({ welcomeText, email }) => {
     }
   }
 
+  console.log(email);
+
   return (
     <div className="flex items-center justify-between mb-8">
       <h1 className="text-2xl md:text-4xl text-black font-bold">
@@ -54,7 +56,7 @@ const MainHeader = ({ welcomeText, email }) => {
             </div>
           ) : (
             <p className="bg-blue-900 rounded-full px-4 py-2 text-center">
-              {email}
+              {email?.charAt(0).upperCase()}
             </p>
           )}
         </Link>

@@ -27,7 +27,7 @@ const Dropdown = ({ items }) => {
             </button>
 
             {isOpen && (
-                <div className="z-10 bg-white divide-y divide-gray-100 rounded-lg border-2 border-black shadow w-44">
+                <div className="z-10 bg-white  divide-y divide-gray-100 rounded-lg border-2 border-black shadow sm:w-44">
                     <ul className="py-2 text-sm text-black" aria-labelledby="dropdownDividerButton">
                         {items.map((item, index) => (
                             <li key={index}>

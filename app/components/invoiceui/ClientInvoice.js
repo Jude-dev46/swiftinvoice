@@ -1,10 +1,15 @@
 "use client";
+
 import Link from "next/link";
 
-const ClientInvoice = ({ isClient, handleShow, clients }) => {
+const ClientInvoice = ({ businessEmail, isClient, handleShow, clients }) => {
   let content;
 
-  if (clients.length === 0) {
+  const filteredClients = clients.filter(
+    (cli) => cli.createdBy.businessEmail === businessEmail
+  );
+
+  if (filteredClients.length === 0) {
     content = "No registered client";
   }
 
@@ -38,10 +43,10 @@ const ClientInvoice = ({ isClient, handleShow, clients }) => {
           <p className="w-fit md:w-[20%] text-left">PhoneNo</p>
         </div>
         {!clients && <p className="text-black">{content}</p>}
-        {clients.map((client) => (
+        {filteredClients.map((client) => (
           <div key={client.clientId}>
             <Link href={`/clients/${client.clientId}`}>
-              <div className="w-full flex gap-16 md:gap-0 justify-between items-center text-black lg:text-lg font-bold px-8 py-4 ">
+              <div className="w-full flex gap-16 md:-gap-16 justify-between items-center text-black font-bold px-2 md:px-8 py-4">
                 <p className="col-span-1 w-fit text-left">
                   {client.clientId.slice(0, 10)}
                 </p>

@@ -9,6 +9,7 @@ const MainClient = ({ handleShow, clients, email }) => {
       <ClientInvoice
         isClient={true}
         handleShow={handleShow}
+        businessEmail={email}
         clients={clients}
       />
     </div>

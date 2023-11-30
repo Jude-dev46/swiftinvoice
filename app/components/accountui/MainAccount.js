@@ -1,6 +1,10 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import { uiActions } from "../store/uislice";
+import { useDispatch, useSelector } from "react-redux";
+import Menu from "../../../public/menu.svg";
 import { useRouter } from "next/navigation";
 import { format, parseISO } from "date-fns";
 
@@ -15,6 +19,32 @@ const MainAccount = () => {
   const [businessName, setBusinessName] = useState("");
   const [businessField, setBusinessField] = useState("");
   const [date, setDate] = useState("");
+  const fileInputRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(() => {
+    if (typeof window !== "undefined") {
+      const storedImageData = localStorage.getItem("uploadedImage");
+      return storedImageData ? JSON.parse(storedImageData) : null;
+    }
+  });
+
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.ui.isOpen);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (selectedImage) {
+        localStorage.setItem("uploadedImage", JSON.stringify(selectedImage));
+      }
+    }
+  }, [selectedImage]);
+
+  function toggleSidebar() {
+    if (isOpen) {
+      dispatch(uiActions.setIsOpen(false));
+    } else {
+      dispatch(uiActions.setIsOpen(true));
+    }
+  }
 
   useEffect(() => {
     (async () => {
@@ -30,6 +60,26 @@ const MainAccount = () => {
     })();
   }, []);
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSelectedImage(reader.result);
+    };
+    console.log(file);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   function formatDate(dateArg) {
     if (date) {
       return format(parseISO(dateArg), "dd-mm");
@@ -38,10 +88,12 @@ const MainAccount = () => {
     }
   }
 
-  console.log(date);
   function logoutHandler() {
+    dispatch(uiActions.setIsLoading(true));
     localStorage.removeItem("data");
-    router.push("/auth");
+    localStorage.removeItem("uploadedImage");
+    dispatch(uiActions.setIsLoading(false));
+    router.push("/");
   }
 
   //Uploading the Admin image
@@ -80,20 +132,27 @@ const MainAccount = () => {
   return (
     <div className="bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 w-full lg:w-10/12 flex flex-col px-6 md:px-12 py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-1xl md:text-4xl text-black font-bold">Accounts</h1>
-        <div className="">
+        <h1 className="text-2xl md:text-4xl text-black font-bold">Accounts</h1>
+        <div className="flex gap-4">
           <button
             className="flex items-center justify-between gap-2 text-[#1916B9] border-[#1916B9] rounded-[20px] border-[2.5px] px-4 py-2"
             onClick={logoutHandler}
           >
             <Image src={logout_icon} alt="" width={20} /> Logout
           </button>
+          <Image
+            src={Menu}
+            width={32}
+            alt=""
+            onClick={toggleSidebar}
+            className="lg:hidden block"
+          />
         </div>
       </div>
 
-      <div className="mt-8 mx-auto text-black text-center space-y-3">
-        <div className="relative">
-          {selectedImage === false ? (
+      <div className="mt-8 mx-auto flex flex-col text-black text-center space-y-3">
+        <div className="relative flex flex-col self-center">
+          {selectedImage ? (
             <div className="w-32 h-32 lg:w-44 lg:h-44 rounded-full">
               <Image
                 src={selectedImage}

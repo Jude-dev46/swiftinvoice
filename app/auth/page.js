@@ -124,7 +124,7 @@ const Signup = () => {
             <div className="my-input flex flex-col w-full text-black text-lg lg:text-xl my-3">
               <label htmlFor="dob">D.O.B*</label>
               <input
-                type="text"
+                type="date"
                 id="dob"
                 placeholder="DD/MM"
                 onInput={(e) => {

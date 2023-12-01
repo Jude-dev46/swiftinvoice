@@ -56,7 +56,7 @@ const MainHeader = ({ welcomeText, email }) => {
             </div>
           ) : (
             <p className="bg-blue-900 rounded-full px-4 py-2 text-center">
-              {email?.charAt(0).upperCase()}
+              {!email ? "" : email?.charAt(0).upperCase()}
             </p>
           )}
         </Link>

@@ -4,26 +4,28 @@ import MainHeader from "../dashboardUI/MainHeader";
 
 const MainSettings = () => {
   return (
-    <div className="text-black bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 w-full h-[full] lg:w-10/12 flex flex-col px-8 md:px-12 lg:px-24 py-8 overflow-y-scroll">
+    <div className="relative text-black bg-gradient-to-br from-yellow-100 via-red-100 to-violet-100 w-full h-[full] lg:w-10/12 flex flex-col px-8 md:px-12 lg:px-24 py-8 overflow-y-scroll">
       <MainHeader welcomeText={"Settings"} />
 
       <div className="space-y-4">
-        <div className="bg-white p-4 rounded-lg">
+        <div className="bg-white p-4 py-6 rounded-lg">
           <p className="text-[1.2rem] font-semibold">General</p>
           <hr className=" border-black my-4 border-2" />
-          <div className="flex items-start gap-28">
+          <div className="flex items-start gap-28 relative">
             <ul>
               <li>Delete Invoices after</li>
             </ul>
 
-            <Dropdown items={["Never", "7days"]} />
+            <div className="absolute right-2 top-0">
+              <Dropdown items={["Never", "7days"]} />
+            </div>
           </div>
         </div>
 
         <div className="bg-white p-4 rounded-lg">
           <p className="text-[1.2rem] font-semibold">Dashboard</p>
           <hr className=" border-black my-4 border-2" />
-          <div className="flex items-start gap-28">
+          <div className="flex items-start gap-28 relative">
             {/* [#ffd875]  */}
             <ul className=" text-sm font-medium text-black rounded-lg">
               <li className="w-full  border-gray-200 rounded-t-lg ">
@@ -77,8 +79,9 @@ const MainSettings = () => {
                 </div>
               </li>
             </ul>
-
-            <Dropdown items={["USD", "NGN"]} />
+            <div className="absolute right-2 top-0">
+              <Dropdown items={["USD", "NGN"]} />
+            </div>
           </div>
         </div>
 

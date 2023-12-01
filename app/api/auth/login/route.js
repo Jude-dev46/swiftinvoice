@@ -21,13 +21,18 @@ export async function POST(request) {
       return NextResponse.json({
         status: false,
         message: "This user is not registered! You need to register.",
+        error: "Bad request sent!",
       });
     }
 
     const passwordMatch = await bcrypt.compare(password, foundUser.password);
 
     if (!passwordMatch) {
-      return NextResponse.json({ status: false, message: "Invalid password!" });
+      return NextResponse.json({
+        status: false,
+        message: "Invalid password!",
+        error: "Incorrect password sent!",
+      });
     }
 
     const token = jwt.sign({ userId: foundUser.businessName }, secret_key, {
@@ -59,6 +64,10 @@ export async function POST(request) {
     });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ status: false, message: "An error occurred!" });
+    return NextResponse.json({
+      status: false,
+      message: "An error occurred!",
+      error: error.message,
+    });
   }
 }

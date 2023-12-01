@@ -87,7 +87,7 @@ const ClientModal = ({ show, handleClose }) => {
       <div className="bg-white relative flex flex-col border rounded-lg p-6 z-10">
         <div
           onClick={handleClose}
-          className="w-12 mb-4 text-center text-blue-900 cursor-pointer hover:text-blue-950 hover:font-bold"
+          className="w-12 mb-4 self-end text-center text-blue-900 cursor-pointer hover:text-blue-950 hover:font-bold"
         >
           close
         </div>

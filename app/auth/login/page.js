@@ -14,6 +14,7 @@ import Modal from "../../components/ui/Modal";
 const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [message, setMessage] = useState("");
   const [isEmailError, setIsEmailError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
   const emailInputRef = useRef();
@@ -23,7 +24,9 @@ const Login = () => {
 
   async function loginHandler(e) {
     e.preventDefault();
+
     try {
+      setMessage("");
       dispatch(uiActions.setIsLoading(true));
 
       const enteredData = {
@@ -58,6 +61,10 @@ const Login = () => {
       });
 
       const data = await res.json();
+
+      if (!data.status) {
+        setMessage(data.message);
+      }
 
       const userData = {
         userId: data.data._id,
@@ -141,6 +148,7 @@ const Login = () => {
                 >
                   Sign In
                 </button>
+                <p className="text-red-600">{message}</p>
               </form>
             </div>
 

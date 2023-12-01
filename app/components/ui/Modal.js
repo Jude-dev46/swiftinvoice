@@ -11,7 +11,7 @@ const Modal = ({ isCreateInvoice }) => {
         {!isLoading && (
           <div
             onClick={() => {}}
-            className="w-12 mb-2 text-center text-blue-900 cursor-pointer hover:text-blue-950 hover:font-bold"
+            className="w-12 mb-2 self-end text-center text-blue-900 cursor-pointer hover:text-blue-950 hover:font-bold"
           >
             close
           </div>

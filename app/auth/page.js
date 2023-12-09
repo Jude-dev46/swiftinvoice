@@ -18,7 +18,6 @@ const Signup = () => {
 
   const isLoading = useSelector((state) => state.ui.isLoading);
   const isError = useSelector((state) => state.ui.isError);
-  const isAuth = useSelector((state) => state.ui.isAuthenticated);
 
   const schema = yup.object().shape({
     businessName: yup.string().required("Business Name is required"),
@@ -126,11 +125,8 @@ const Signup = () => {
               <input
                 type="date"
                 id="dob"
-                placeholder="DD/MM"
                 onInput={(e) => {
-                  e.target.value = e.target.value
-                    .slice(0, 4)
-                    .replace(/\D/g, "");
+                  e.target.value = e.target.value;
                 }}
                 className="bg-transparent text-center border-2 border-black rounded-md outline-none px-2 py-1.5 text-lg lg:text-xl text-black"
                 {...register("date")}

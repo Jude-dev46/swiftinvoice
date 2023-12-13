@@ -21,7 +21,11 @@ const ModalUI = ({ show, handleClose }) => {
     if (isLoading) {
       dispatch(uiActions.setIsLoading(false));
     }
-  }, [isLoading, dispatch]);
+    if (isError) {
+      dispatch(uiActions.setIsError(false));
+    }
+    // eslint-disable-next-line
+  }, []);
 
   if (typeof window !== "undefined") {
     if (show) {

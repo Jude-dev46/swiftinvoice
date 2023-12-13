@@ -20,7 +20,8 @@ const ClientModal = ({ show, handleClose }) => {
     if (isLoading) {
       dispatch(uiActions.setIsLoading(false));
     }
-  }, [isLoading, dispatch]);
+    // eslint-disable-next-line
+  }, []);
 
   if (show && typeof window !== "undefined") {
     document.body.classList.add("overflow-hidden");
@@ -55,6 +56,7 @@ const ClientModal = ({ show, handleClose }) => {
       !phoneNoIsValid
     ) {
       alert("Invalid inputs");
+      dispatch(uiActions.setIsLoading(false));
     }
 
     try {

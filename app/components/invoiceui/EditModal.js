@@ -49,6 +49,8 @@ const EditModal = ({ show, handleClose, invoiceId }) => {
 
     if (!userIdIsValid || !amountIsValid || !emailIsValid || !dueDate) {
       alert("Invalid inputs");
+      dispatch(uiActions.setIsError(true));
+      dispatch(uiActions.setIsLoading(false));
     }
 
     try {
@@ -72,7 +74,10 @@ const EditModal = ({ show, handleClose, invoiceId }) => {
         return;
       }
       handleClose();
-    } catch (error) {}
+    } catch (error) {
+      dispatch(uiActions.setIsError(true));
+      dispatch(uiActions.setIsLoading(false));
+    }
   }
 
   return (

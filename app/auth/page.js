@@ -10,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+
 const Signup = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState(0);

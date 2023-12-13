@@ -36,13 +36,9 @@ const InvoicePage = ({ params }) => {
   const handleShow = () => setShow(true);
 
   return (
-    <div className="h-[100svh] lg:h-[100svh] flex w-full relative">
+    <div className="h-[100svh] lg:h-[100svh] flex w-full relative overflow-x-hidden">
       {show && (
-        <EditModal
-          show={show}
-          handleClose={handleClose}
-          invoiceId={invoiceId}
-        />
+        <EditModal show={show} handleClose={handleClose} invoiceId={invoice} />
       )}
       <Sidebar />
       <SingleInvoice

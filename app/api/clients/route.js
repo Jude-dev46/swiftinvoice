@@ -23,7 +23,7 @@ export async function GET() {
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { bussinessEmail, clientName, email, phoneNo } = body;
+    const { businessEmail, clientName, email, phoneNo } = body;
 
     if (!clientName || !email || !phoneNo) {
       return NextResponse.json(
@@ -33,7 +33,7 @@ export async function POST(req) {
     }
 
     const foundClient = await Client.findOne({ email });
-    const currentUser = await User.findOne({ bussinessEmail });
+    const currentUser = await User.findOne({ businessEmail });
 
     const createdBy = {
       bussinessName: currentUser.businessName,
@@ -48,13 +48,13 @@ export async function POST(req) {
     }
 
     const client = await stripe.customers.create({
-      name: bussinessEmail,
+      name: businessEmail,
       email: email,
       phone: phoneNo,
     });
 
     const newClient = await Client({
-      bussinessEmail: bussinessEmail,
+      bussinessEmail: businessEmail,
       clientName: clientName,
       clientId: client.id,
       email: email,

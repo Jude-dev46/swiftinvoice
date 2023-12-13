@@ -49,7 +49,7 @@ const SingleInvoiceInfo = ({ invoice, invoiceId, openModal }) => {
         body: JSON.stringify({
           businessName: name,
           clientEmail: inputRef.current.value,
-          product: invoices[0]?.product,
+          product: invoice[0]?.product,
           paymentUrl: data.data.url,
         }),
       });

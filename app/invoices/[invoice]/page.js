@@ -23,11 +23,11 @@ const InvoicePage = ({ params }) => {
         const res = await fetch("/api/invoices");
         const data = await res.json();
 
-        const singleInvoice = data.data.filter(
+        const singleInvoices = data.data.filter(
           (inv) => inv.businessEmail === parsedData.email
         );
 
-        setInvoices(singleInvoice);
+        setInvoices(singleInvoices);
       }
     })();
   }, []);

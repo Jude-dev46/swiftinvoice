@@ -37,7 +37,7 @@ export async function POST(req) {
       );
     }
 
-    await transport.sendMail({
+    await transporter.sendMail({
       ...mailOptions,
       subject: `Invoice from ${businessName}`,
       text: `Find below payment link for ${product}`,

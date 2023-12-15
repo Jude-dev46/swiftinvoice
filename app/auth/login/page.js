@@ -90,16 +90,16 @@ const Login = () => {
         <div className="flex justify-center">
           <div className="w-full max-w-sm mx-auto overflow-hidden rounded-lg absolute top-32">
             <div className="px-6 py-4">
-              <h3 className="mt-3 text-xl font-medium text-center text-gray-600">
+              <h3 className="mt-3 text-2xl font-medium text-center text-gray-600">
                 Welcome Back
               </h3>
 
-              <p className="mt-1 text-center text-gray-500">
+              <p className="text-md text-center text-gray-500">
                 Login or create an account
               </p>
 
-              <form onSubmit={loginHandler}>
-                <div className="w-full mt-4">
+              <form onSubmit={loginHandler} className="mt-4">
+                <div className="my-input flex flex-col w-full text-black text-lg lg:text-xl my-3">
                   <label htmlFor="email" className="text-black">
                     Email Address
                   </label>
@@ -120,7 +120,7 @@ const Login = () => {
                   )}
                 </div>
 
-                <div className="w-full mt-4">
+                <div className="my-input flex flex-col w-full text-black text-lg lg:text-xl my-3">
                   <label htmlFor="password" className="text-black">
                     Password
                   </label>

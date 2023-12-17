@@ -52,6 +52,10 @@ export async function POST(req) {
       message: "Invoice successfully sent to client's mail.",
     });
   } catch (e) {
-    return NextResponse.json({ status: false, message: e.message });
+    return NextResponse.json({
+      status: false,
+      message: "An error occurred!",
+      error: e.message,
+    });
   }
 }

@@ -1,18 +1,19 @@
-import NextResponse from "next/server";
+import { NextResponse } from "next/server";
 
 const nodemailer = require("nodemailer");
 const Client = require("../../models/client");
 
-const email = process.env.EMAIL;
-const pass = process.env.EMAIL_PASS;
+const EMAIL = process.env.EMAIL;
+const PASS = process.env.EMAIL_PASS;
 
 let clientMail;
+let email;
 
 export const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: email,
-    pass,
+    user: EMAIL,
+    pass: PASS,
   },
 });
 
@@ -25,10 +26,11 @@ export async function POST(req) {
   const body = await req.json();
   const { businessName, clientEmail, product, paymentUrl } = body;
 
-  clientMail = clientEmail;
+  email = clientEmail;
+  clientMail = email;
 
   try {
-    const foundClient = await Client.findOne({ clientEmail });
+    const foundClient = await Client.findOne({ email });
 
     if (!foundClient) {
       return NextResponse.json(
@@ -38,7 +40,8 @@ export async function POST(req) {
     }
 
     await transporter.sendMail({
-      ...mailOptions,
+      from: EMAIL,
+      to: clientMail,
       subject: `Invoice from ${businessName}`,
       text: `Find below payment link for ${product}`,
       html: `<div>
@@ -52,6 +55,7 @@ export async function POST(req) {
       message: "Invoice successfully sent to client's mail.",
     });
   } catch (e) {
+    console.log("YO", e);
     return NextResponse.json({
       status: false,
       message: "An error occurred!",

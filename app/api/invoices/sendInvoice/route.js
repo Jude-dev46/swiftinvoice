@@ -40,7 +40,7 @@ export async function POST(req) {
     });
 
     return NextResponse.json({
-      status: false,
+      status: true,
       message: "Successfully created!",
       data: sessions,
     });

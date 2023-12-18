@@ -40,13 +40,13 @@ const ClientModal = ({ show, handleClose }) => {
     const enteredData = {
       businessEmail: parsedData.email,
       clientName: nameInputRef.current.value,
-      email: emailInputRef.current.value,
+      clientEmail: emailInputRef.current.value,
       phoneNo: +phoneNoInputRef.current.value,
     };
 
     const businessEmailIsValid = enteredData.businessEmail.trim().length > 0;
     const clientNameIsValid = enteredData.clientName.trim().length > 0;
-    const emailIsValid = enteredData.email.includes("@");
+    const emailIsValid = enteredData.clientEmail.includes("@");
     const phoneNoIsValid = enteredData.phoneNo > 0;
 
     if (

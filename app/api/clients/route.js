@@ -5,6 +5,8 @@ const User = require("../models/user");
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 const InitiatetMongoServer = require("../config/db");
 
+let email;
+
 InitiatetMongoServer();
 export async function GET() {
   try {
@@ -23,22 +25,18 @@ export async function GET() {
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { businessEmail, clientName, email, phoneNo } = body;
+    const { businessEmail, clientName, clientEmail, phoneNo } = body;
 
-    if (!clientName || !email || !phoneNo) {
+    if (!clientName || !clientEmail || !phoneNo) {
       return NextResponse.json(
         { status: false, message: "Invalid request sent!" },
         { status: 400 }
       );
     }
 
-    const foundClient = await Client.findOne({ email });
-    const currentUser = await User.findOne({ businessEmail });
-
-    const createdBy = {
-      bussinessName: currentUser.businessName,
-      bussinessEmail: currentUser.email,
-    };
+    email = businessEmail;
+    const foundClient = await Client.findOne({ clientEmail });
+    const currentUser = await User.findOne({ email });
 
     if (foundClient) {
       return NextResponse.json(
@@ -46,6 +44,11 @@ export async function POST(req) {
         { status: 409 }
       );
     }
+
+    const createdBy = {
+      bussinessName: currentUser.businessName,
+      bussinessEmail: currentUser.email,
+    };
 
     const client = await stripe.customers.create({
       name: businessEmail,
@@ -57,7 +60,7 @@ export async function POST(req) {
       bussinessEmail: businessEmail,
       clientName: clientName,
       clientId: client.id,
-      email: email,
+      email: clientEmail,
       phoneNo: phoneNo,
       createdBy: createdBy,
     });
@@ -73,6 +76,7 @@ export async function POST(req) {
       { status: 201 }
     );
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ status: false, message: "An error occurred!" });
   }
 }

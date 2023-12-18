@@ -38,7 +38,7 @@ const Invoices = () => {
         setEmail(parsedData.email);
       }
     })();
-  }, []);
+  }, [invoices]);
 
   return (
     <div className="h-full lg:h-[100svh] flex w-full relative">

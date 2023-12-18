@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 const invoice = require("../../models/invoice");
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
+const base_url = process.env.BASE_URL;
 
 export async function POST(req) {
   try {
@@ -35,8 +36,8 @@ export async function POST(req) {
           quantity: foundInv.quantity,
         },
       ],
-      success_url: `http://localhost:3000/invoices/success/${invoiceId}`,
-      cancel_url: `http://localhost:3000/invoices/failure/${invoiceId}`,
+      success_url: `${base_url}/invoices/success/${invoiceId}`,
+      cancel_url: `${base_url}/invoices/failure/${invoiceId}`,
     });
 
     return NextResponse.json({

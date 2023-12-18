@@ -69,6 +69,10 @@ const SingleInvoiceInfo = ({ invoice, invoiceId, openModal }) => {
     setShow(true);
   }
 
+  function cancelShow() {
+    setShow(false);
+  }
+
   return (
     <div className="w-full text-black flex items-center gap-8 relative">
       <div className="flex flex-col justify-center gap-4 text-xl font-bold">
@@ -107,19 +111,27 @@ const SingleInvoiceInfo = ({ invoice, invoiceId, openModal }) => {
         <p className="text-green-600 text-center">{message}</p>
       </div>
       {show && (
-        <div className="bg-[rgb(0,0,0,0.7)] fixed w-full h-screen top-0 left-0 flex justify-center items-center gap-4 z-20 overflow-hidden">
+        <div className="bg-[rgb(0,0,0,0.7)] fixed w-full h-screen top-0 left-0 flex flex-col justify-center items-center gap-4 z-20 overflow-hidden">
           <input
             type="email"
             ref={inputRef}
             placeholder="Enter client email address"
             className="block w-[60%] md:w-[15%] px-4 py-2 text-gray-700 placeholder-gray-500 bg-white border rounded-lg focus:border-[#FFB600] focus:ring-opacity-40 focus:outline-none  focus:ring-[#ffe08a]"
           />
-          <button
-            className="bg-green-600 px-4 py-2 rounded-lg"
-            onClick={sendInvoiceHandler}
-          >
-            Send
-          </button>
+          <div className="flex gap-2">
+            <button
+              className="bg-red-600 px-4 py-2 rounded-lg"
+              onClick={cancelShow}
+            >
+              Cancel
+            </button>
+            <button
+              className="bg-green-600 px-4 py-2 rounded-lg"
+              onClick={sendInvoiceHandler}
+            >
+              Send
+            </button>
+          </div>
         </div>
       )}
     </div>

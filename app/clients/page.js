@@ -27,7 +27,7 @@ const Clients = () => {
         setEmail(parsedData.email);
       }
     })();
-  }, []);
+  }, [clients]);
 
   function handleClose() {
     setShow(false);

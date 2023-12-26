@@ -40,12 +40,14 @@ const RecentInvoices = ({
   }, [selectedValue, invoices]);
 
   function formatThreadDate(dateArg) {
-    if (isToday(parseISO(dateArg))) {
-      return "Today";
-    } else if (isYesterday(parseISO(dateArg))) {
-      return "Yesterday";
-    } else {
-      return format(parseISO(dateArg), "dd-mm-yy");
+    if (dateArg) {
+      if (isToday(parseISO(dateArg))) {
+        return "Today";
+      } else if (isYesterday(parseISO(dateArg))) {
+        return "Yesterday";
+      } else {
+        return format(parseISO(dateArg), "dd-mm-yy");
+      }
     }
   }
 
@@ -78,7 +80,7 @@ const RecentInvoices = ({
           </div>
         )}
       </div>
-      <div className="overflow-y-scroll max-h-[85%]">
+      <div className="overflow-y-scroll max-h-[85%]" key={Math.random(2) * 2}>
         <div className="w-full flex justify-between items-center text-black font-bold px-2 md:px-8 py-4">
           <p className="w-fit md:w-fit text-right">ID</p>
           <p className="w-fit md:w-fit text-right">Amount</p>

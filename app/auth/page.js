@@ -165,7 +165,7 @@ const Signup = () => {
 
               <div className="w-full">
                 <p
-                  onClick={handleButton} // Make sure to define handleButton function
+                  onClick={handleButton}
                   id="nextBtn"
                   className={
                     state
